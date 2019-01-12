@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LocationRepository")
+ * @UniqueEntity("address")
  */
 class Location
 {
@@ -32,7 +35,7 @@ class Location
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $address;
 
@@ -45,6 +48,25 @@ class Location
      * @ORM\Column(type="string", length=255)
      */
     private $currency;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="location")
+     */
+    private $user;
+
+
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {

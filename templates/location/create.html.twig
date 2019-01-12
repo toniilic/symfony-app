@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<div class="my-3 p-3 bg-white rounded shadow-sm">
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <small class="d-block text-right mt-3">
+        <a href="#">Go to link</a>
+    </small>
+</div>
+
+
+
+{% endblock %}
+
+
