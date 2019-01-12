@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PhoneNumberRepository")
+ * @UniqueEntity("number")
  */
 class PhoneNumber
 {
@@ -23,7 +26,13 @@ class PhoneNumber
     private $type;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="bigint", unique=true)
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 50,
+     *      minMessage = "Your number must be at least {{ limit }} characters long",
+     *      maxMessage = "Your number cannot be longer than {{ limit }} characters"
+     * )
      */
     private $number;
 

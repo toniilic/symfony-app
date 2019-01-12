@@ -34,7 +34,6 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->location = new ArrayCollection();
         $this->phoneNumbers = new ArrayCollection();
     }
 
@@ -49,7 +48,7 @@ class User extends BaseUser
     /**
      * @return Collection|Location[]
      */
-    public function getLocation(): Collection
+    public function getLocation()
     {
         return $this->location;
     }

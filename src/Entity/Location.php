@@ -54,7 +54,10 @@ class Location
      */
     private $user;
 
-
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $approved;
 
     public function getUser(): ?User
     {
