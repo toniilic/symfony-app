@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Location;
 use App\Entity\Task;
 use App\Entity\User;
@@ -35,6 +36,14 @@ class TaskController extends AbstractController
         $form = $this->createFormBuilder($task)
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
+            ->add('category', EntityType::class, array(
+                'class' => Category::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.title', 'ASC');
+                },
+                'choice_label' => 'title',
+            ))
             ->add('save', SubmitType::class, array('label' => 'Create Task'))
             ->getForm();
 

@@ -28,7 +28,7 @@ class Category
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Task", inversedBy="category")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $task;
 
