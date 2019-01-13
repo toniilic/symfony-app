@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ReviewRepository")
  */
-class Category
+class Review
 {
     /**
      * @ORM\Id()
@@ -22,15 +22,14 @@ class Category
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Task", inversedBy="category")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $task;
+    private $rating;
 
     public function getId(): ?int
     {
@@ -54,21 +53,21 @@ class Category
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getTask(): ?Task
+    public function getRating(): ?int
     {
-        return $this->task;
+        return $this->rating;
     }
 
-    public function setTask(?Task $task): self
+    public function setRating(int $rating): self
     {
-        $this->task = $task;
+        $this->rating = $rating;
 
         return $this;
     }
