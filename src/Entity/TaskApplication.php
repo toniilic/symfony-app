@@ -16,26 +16,10 @@ class TaskApplication
      */
     private $id;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Task", inversedBy="taskApplication", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $task;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTask(): ?Task
-    {
-        return $this->task;
-    }
-
-    public function setTask(Task $task): self
-    {
-        $this->task = $task;
-
-        return $this;
-    }
 }

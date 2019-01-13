@@ -55,20 +55,21 @@ class Location
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="location")
      */
     private $user;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Task", mappedBy="location", cascade={"persist", "remove"})
-     */
-    private $task;
-
+    
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isHidden;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="location")
+     */
+    private $tasks;
+
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
     }
 
     public function getUser(): ?User
@@ -160,23 +161,6 @@ class Location
         return $this;
     }
 
-    public function getTask(): ?Task
-    {
-        return $this->task;
-    }
-
-    public function setTask(Task $task): self
-    {
-        $this->task = $task;
-
-        // set the owning side of the relation if necessary
-        if ($this !== $task->getLocation()) {
-            $task->setLocation($this);
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|Contact[]
      */
@@ -213,6 +197,37 @@ class Location
     public function setIsHidden(?bool $isHidden): self
     {
         $this->isHidden = $isHidden;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Task[]
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(Task $task): self
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+            $task->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->contains($task)) {
+            $this->tasks->removeElement($task);
+            // set the owning side to null (unless already changed)
+            if ($task->getLocation() === $this) {
+                $task->setLocation(null);
+            }
+        }
 
         return $this;
     }

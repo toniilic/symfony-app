@@ -22,12 +22,6 @@ class Question
     private $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Task", inversedBy="questions")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $task;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Answer", mappedBy="question", cascade={"persist", "remove"})
      */
     private $answer;
@@ -45,18 +39,6 @@ class Question
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getTask(): ?Task
-    {
-        return $this->task;
-    }
-
-    public function setTask(?Task $task): self
-    {
-        $this->task = $task;
 
         return $this;
     }

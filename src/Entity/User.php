@@ -31,7 +31,7 @@ class User extends BaseUser
     private $location;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="owner")
+     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="user")
      */
     private $tasks;
 
@@ -80,7 +80,7 @@ class User extends BaseUser
     {
         if (!$this->tasks->contains($task)) {
             $this->tasks[] = $task;
-            $task->setOwner($this);
+            $task->setUser($this);
         }
 
         return $this;
@@ -91,8 +91,8 @@ class User extends BaseUser
         if ($this->tasks->contains($task)) {
             $this->tasks->removeElement($task);
             // set the owning side to null (unless already changed)
-            if ($task->getOwner() === $this) {
-                $task->setOwner(null);
+            if ($task->getUser() === $this) {
+                $task->setUser(null);
             }
         }
 

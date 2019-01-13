@@ -34,21 +34,21 @@ class TaskController extends AbstractController
         $user = $this->getUser();
 
         $task = new Task();
-        $task->setOwner($user);
+        $task->setUser($user);
         $task->setLocation($user->getLocation());
 
         $form = $this->createFormBuilder($task)
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
-/*            ->add('category', EntityType::class, array(
+            ->add('category', EntityType::class, array(
                 'class' => Category::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
                         ->orderBy('c.title', 'ASC');
                 },
                 'choice_label' => 'title',
-            ))*/
-/*            ->add('phoneNumber', EntityType::class, array(
+            ))
+            ->add('phoneNumber', EntityType::class, array(
                 'class' => PhoneNumber::class,
                 'query_builder' => function (EntityRepository $er) use($user){
                     return $er->createQueryBuilder('p')
@@ -58,7 +58,7 @@ class TaskController extends AbstractController
                         ->orderBy('p.number', 'ASC');
                 },
                 'choice_label' => 'number',
-            ))*/
+            ))
             ->add('levelOfExpertise', ChoiceType::class, array(
                 'choices'  => array(
                     'Novice' => 'Novice',

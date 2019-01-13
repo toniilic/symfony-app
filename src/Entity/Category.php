@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,10 +29,14 @@ class Category
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Task", inversedBy="category")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="category")
      */
-    private $task;
+    private $tasks;
+
+    public function __construct()
+    {
+        $this->tasks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,15 +67,35 @@ class Category
         return $this;
     }
 
-    public function getTask(): ?Task
+    /**
+     * @return Collection|Task[]
+     */
+    public function getTasks(): Collection
     {
-        return $this->task;
+        return $this->tasks;
     }
 
-    public function setTask(?Task $task): self
+    public function addTask(Task $task): self
     {
-        $this->task = $task;
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+            $task->setCategory($this);
+        }
 
         return $this;
     }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->contains($task)) {
+            $this->tasks->removeElement($task);
+            // set the owning side to null (unless already changed)
+            if ($task->getCategory() === $this) {
+                $task->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

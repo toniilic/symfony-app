@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,21 +30,17 @@ class Task
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tasks")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $owner;
+    private $user;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Location", inversedBy="task", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tasks")
      * @ORM\JoinColumn(nullable=false)
-     */
-    private $location;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="task")
      */
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PhoneNumber", mappedBy="task")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PhoneNumber", inversedBy="tasks")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $phoneNumber;
 
@@ -56,34 +50,29 @@ class Task
     private $levelOfExpertise;
 
     /**
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="integer")
      */
     private $budget;
 
     /**
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="integer")
      */
     private $duration;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $dueDate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="tasks")
+     */
+    private $location;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $approved;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -114,62 +103,38 @@ class Task
         return $this;
     }
 
-    public function getOwner(): ?User
+    public function getUser(): ?User
     {
-        return $this->owner;
+        return $this->user;
     }
 
-    public function setOwner(?User $owner): self
+    public function setUser(?User $user): self
     {
-        $this->owner = $owner;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getLocation(): ?Location
-    {
-        return $this->location;
-    }
-
-    public function setLocation(Location $location): self
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    /**
-     * @return Category
-     */
-    public function getCategory()
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory($category)
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
-    }
-
-    public function addCategory(Category $category): self
-    {
-        if (!$this->category->contains($category)) {
-            $this->category[] = $category;
-            $category->setTask($this);
-        }
 
         return $this;
     }
 
-    public function removeCategory(Category $category): self
+    public function getPhoneNumber(): ?PhoneNumber
     {
-        if ($this->category->contains($category)) {
-            $this->category->removeElement($category);
-            // set the owning side to null (unless already changed)
-            if ($category->getTask() === $this) {
-                $category->setTask(null);
-            }
-        }
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?PhoneNumber $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
@@ -209,63 +174,27 @@ class Task
 
         return $this;
     }
-    
-    /**
-     * @return Collection|Question[]
-     */
-    public function getQuestions(): Collection
-    {
-        return $this->questions;
-    }
-
-    public function addQuestion(Question $question): self
-    {
-        if (!$this->questions->contains($question)) {
-            $this->questions[] = $question;
-            $question->setTask($this);
-        }
-
-        return $this;
-    }
-
-    public function removeQuestion(Question $question): self
-    {
-        if ($this->questions->contains($question)) {
-            $this->questions->removeElement($question);
-            // set the owning side to null (unless already changed)
-            if ($question->getTask() === $this) {
-                $question->setTask(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getTaskApplication(): ?TaskApplication
-    {
-        return $this->taskApplication;
-    }
-
-    public function setTaskApplication(TaskApplication $taskApplication): self
-    {
-        $this->taskApplication = $taskApplication;
-
-        // set the owning side of the relation if necessary
-        if ($this !== $taskApplication->getTask()) {
-            $taskApplication->setTask($this);
-        }
-
-        return $this;
-    }
 
     public function getDueDate(): ?\DateTimeInterface
     {
         return $this->dueDate;
     }
 
-    public function setDueDate(?\DateTimeInterface $dueDate): self
+    public function setDueDate(\DateTimeInterface $dueDate): self
     {
         $this->dueDate = $dueDate;
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
 
         return $this;
     }
@@ -282,52 +211,4 @@ class Task
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return PhoneNumber
-     */
-    public function getPhoneNumber()
-    {
-        return $this->phoneNumber;
-    }
-
-    public function setPhoneNumber($phoneNumber)
-    {
-        $this->phoneNumber = $phoneNumber;
-    }
-
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function updatedTimestamps()
-    {
-        $this->setUpdatedAt(new \DateTime('now'));
-        if ($this->getCreatedAt() == null) {
-            $this->setCreatedAt(new \DateTime('now'));
-    }
-    }
 }
