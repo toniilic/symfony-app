@@ -59,6 +59,15 @@ class User extends BaseUser
         return $this->location;
     }
 
+
+    /**
+     *
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
     /**
      * @return Collection|Task[]
      */
