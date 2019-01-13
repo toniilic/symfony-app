@@ -66,16 +66,6 @@ class Task
     private $duration;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="task", orphanRemoval=true)
-     */
-    private $questions;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\TaskApplication", mappedBy="task", cascade={"persist", "remove"})
-     */
-    private $taskApplication;
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dueDate;
@@ -86,21 +76,14 @@ class Task
     private $approved;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
-    
-    public function __construct()
-    {
-        $this->category = new ArrayCollection();
-        $this->questions = new ArrayCollection();
-        $this->phoneNumber = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -156,11 +139,16 @@ class Task
     }
 
     /**
-     * @return Collection|Category[]
+     * @return Category
      */
-    public function getCategory(): Collection
+    public function getCategory()
     {
         return $this->category;
+    }
+
+    public function setCategory($category)
+    {
+        $this->category = $category;
     }
 
     public function addCategory(Category $category): self
@@ -319,33 +307,27 @@ class Task
     }
 
     /**
-     * @return Collection|PhoneNumber[]
+     * @return PhoneNumber
      */
-    public function getPhoneNumber(): Collection
+    public function getPhoneNumber()
     {
         return $this->phoneNumber;
     }
 
-    public function addPhoneNumber(PhoneNumber $phoneNumber): self
+    public function setPhoneNumber($phoneNumber)
     {
-        if (!$this->phoneNumber->contains($phoneNumber)) {
-            $this->phoneNumber[] = $phoneNumber;
-            $phoneNumber->setTask($this);
-        }
-
-        return $this;
+        $this->phoneNumber = $phoneNumber;
     }
 
-    public function removePhoneNumber(PhoneNumber $phoneNumber): self
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
     {
-        if ($this->phoneNumber->contains($phoneNumber)) {
-            $this->phoneNumber->removeElement($phoneNumber);
-            // set the owning side to null (unless already changed)
-            if ($phoneNumber->getTask() === $this) {
-                $phoneNumber->setTask(null);
-            }
-        }
-
-        return $this;
+        $this->setUpdatedAt(new \DateTime('now'));
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime('now'));
+    }
     }
 }

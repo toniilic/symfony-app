@@ -10,6 +10,8 @@ use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,15 +40,15 @@ class TaskController extends AbstractController
         $form = $this->createFormBuilder($task)
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
-            ->add('category', EntityType::class, array(
+/*            ->add('category', EntityType::class, array(
                 'class' => Category::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
                         ->orderBy('c.title', 'ASC');
                 },
                 'choice_label' => 'title',
-            ))
-            ->add('phoneNumber', EntityType::class, array(
+            ))*/
+/*            ->add('phoneNumber', EntityType::class, array(
                 'class' => PhoneNumber::class,
                 'query_builder' => function (EntityRepository $er) use($user){
                     return $er->createQueryBuilder('p')
@@ -56,7 +58,7 @@ class TaskController extends AbstractController
                         ->orderBy('p.number', 'ASC');
                 },
                 'choice_label' => 'number',
-            ))
+            ))*/
             ->add('levelOfExpertise', ChoiceType::class, array(
                 'choices'  => array(
                     'Novice' => 'Novice',
@@ -64,6 +66,9 @@ class TaskController extends AbstractController
                     'Expert' => 'Expert',
                 ),
             ))
+            ->add('budget', IntegerType::class)
+            ->add('duration', IntegerType::class)
+            ->add('dueDate', DateTimeType::class)
             ->add('save', SubmitType::class, array('label' => 'Create Task'))
             ->getForm();
 
@@ -77,6 +82,7 @@ class TaskController extends AbstractController
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             $entityManager = $this->getDoctrine()->getManager();
+            dump($task);
             $entityManager->persist($task);
             $entityManager->flush();
 

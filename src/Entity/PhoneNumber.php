@@ -43,11 +43,6 @@ class PhoneNumber
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Contact", mappedBy="PhoneNumber")
-     */
-    private $contacts;
-
-    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isHidden;

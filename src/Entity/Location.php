@@ -62,11 +62,6 @@ class Location
     private $task;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Contact", mappedBy="location")
-     */
-    private $contacts;
-
-    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isHidden;
