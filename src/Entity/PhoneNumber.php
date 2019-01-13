@@ -47,6 +47,16 @@ class PhoneNumber
      */
     private $contacts;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isHidden;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Task", inversedBy="phoneNumber")
+     */
+    private $task;
+
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
@@ -117,6 +127,31 @@ class PhoneNumber
             $this->contacts->removeElement($contact);
             $contact->removePhoneNumber($this);
         }
+
+        return $this;
+    }
+
+
+    public function getIsHidden(): ?bool
+    {
+        return $this->isHidden;
+    }
+
+    public function setIsHidden(?bool $isHidden): self
+    {
+        $this->isHidden = $isHidden;
+
+        return $this;
+    }
+
+    public function getTask(): ?Task
+    {
+        return $this->task;
+    }
+
+    public function setTask(?Task $task): self
+    {
+        $this->task = $task;
 
         return $this;
     }

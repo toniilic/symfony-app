@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Location;
+use App\Entity\PhoneNumber;
 use App\Entity\Task;
 use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,6 +45,24 @@ class TaskController extends AbstractController
                         ->orderBy('c.title', 'ASC');
                 },
                 'choice_label' => 'title',
+            ))
+            ->add('phoneNumber', EntityType::class, array(
+                'class' => PhoneNumber::class,
+                'query_builder' => function (EntityRepository $er) use($user){
+                    return $er->createQueryBuilder('p')
+                        ->where('p.isHidden != true')
+                        ->andWhere('p.user = :user')
+                        ->setParameter('user', $user)
+                        ->orderBy('p.number', 'ASC');
+                },
+                'choice_label' => 'number',
+            ))
+            ->add('levelOfExpertise', ChoiceType::class, array(
+                'choices'  => array(
+                    'Novice' => 'Novice',
+                    'Experienced' => 'Experienced',
+                    'Expert' => 'Expert',
+                ),
             ))
             ->add('save', SubmitType::class, array('label' => 'Create Task'))
             ->getForm();

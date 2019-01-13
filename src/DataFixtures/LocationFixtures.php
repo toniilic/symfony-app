@@ -10,7 +10,7 @@ class LocationFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $this->makeLocation($manager, 'Croatia', 'Primorsko-Goranska', 'Rijeka', 'Braće Bačić 34', 51000, 'HRK');
+        //$this->makeLocation($manager, 'Croatia', 'Primorsko-Goranska', 'Rijeka', 'Braće Bačić 34', 51000, 'HRK');
 
         $manager->flush();
     }

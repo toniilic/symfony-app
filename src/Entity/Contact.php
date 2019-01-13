@@ -33,6 +33,7 @@ class Contact
      */
     private $task;
 
+
     public function __construct()
     {
         $this->PhoneNumber = new ArrayCollection();
@@ -112,4 +113,5 @@ class Contact
 
         return $this;
     }
+
 }

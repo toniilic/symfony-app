@@ -13,7 +13,7 @@ use GuzzleHttp\Client as GuzzleClient;
 class HomeController extends AbstractController
 {
     /**
-    * @Route("/home", name="home")
+    * @Route("/", name="home")
     */
     public function index()
     {

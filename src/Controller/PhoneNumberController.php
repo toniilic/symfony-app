@@ -35,6 +35,12 @@ class PhoneNumberController extends AbstractController
                     'Home' => 'home'
                 ),
             ))
+            ->add('isHidden', ChoiceType::class, array(
+                'choices'  => array(
+                    'show phone number' => false,
+                    'hide phone number' => true
+                ),
+            ))
             ->add('save', SubmitType::class, array('label' => 'Create Phone Number'))
             ->getForm();
 

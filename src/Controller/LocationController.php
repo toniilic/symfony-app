@@ -31,6 +31,9 @@ class LocationController extends AbstractController
         $location->setCurrency('HRK');
         $location->setCountry('Croatia');
         $location->setUser($user);
+        if(!$user) {
+            throw \Exception('No user');
+        }
 /*        $location->setAddress();
         $location->setPostalCode();
         $location->setCity();
@@ -50,6 +53,12 @@ class LocationController extends AbstractController
                 'choices'  => array(
                     'Primorsko-goranska' => 'Primorsko-goranska',
                     'Zagrebačka' => 'Zagrebačka'
+                ),
+            ))
+            ->add('isHidden', ChoiceType::class, array(
+                'choices'  => array(
+                    'show location' => false,
+                    'hide location' => true
                 ),
             ))
             ->add('save', SubmitType::class, array('label' => 'Create Location'))

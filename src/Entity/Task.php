@@ -46,10 +46,9 @@ class Task
     private $category;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Contact", inversedBy="task", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\PhoneNumber", mappedBy="task")
      */
-    private $contact;
+    private $phoneNumber;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -100,6 +99,7 @@ class Task
     {
         $this->category = new ArrayCollection();
         $this->questions = new ArrayCollection();
+        $this->phoneNumber = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -186,18 +186,6 @@ class Task
         return $this;
     }
 
-    public function getContact(): ?Contact
-    {
-        return $this->contact;
-    }
-
-    public function setContact(Contact $contact): self
-    {
-        $this->contact = $contact;
-
-        return $this;
-    }
-
     public function getLevelOfExpertise(): ?string
     {
         return $this->levelOfExpertise;
@@ -233,19 +221,7 @@ class Task
 
         return $this;
     }
-
-    public function getLevelOfExpertise2()
-    {
-        return $this->levelOfExpertise2;
-    }
-
-    public function setLevelOfExpertise2($levelOfExpertise2): self
-    {
-        $this->levelOfExpertise2 = $levelOfExpertise2;
-
-        return $this;
-    }
-
+    
     /**
      * @return Collection|Question[]
      */
@@ -338,6 +314,37 @@ class Task
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PhoneNumber[]
+     */
+    public function getPhoneNumber(): Collection
+    {
+        return $this->phoneNumber;
+    }
+
+    public function addPhoneNumber(PhoneNumber $phoneNumber): self
+    {
+        if (!$this->phoneNumber->contains($phoneNumber)) {
+            $this->phoneNumber[] = $phoneNumber;
+            $phoneNumber->setTask($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhoneNumber(PhoneNumber $phoneNumber): self
+    {
+        if ($this->phoneNumber->contains($phoneNumber)) {
+            $this->phoneNumber->removeElement($phoneNumber);
+            // set the owning side to null (unless already changed)
+            if ($phoneNumber->getTask() === $this) {
+                $phoneNumber->setTask(null);
+            }
+        }
 
         return $this;
     }
