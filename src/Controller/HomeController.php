@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Task;
 use App\Service\PosaoHrScraper;
 use App\Service\PosaoUrlScraper;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,15 @@ class HomeController extends AbstractController
     */
     public function index()
     {
-        return $this->render('home/index.html.twig');
+        $repository = $this->getDoctrine()->getRepository(Task::class);
+
+        $tasks = $repository->findByExampleField();
+
+        dump($tasks);
+
+        return $this->render('home/index.html.twig', array(
+            'tasks' => $tasks
+        ));
     }
 
     /**

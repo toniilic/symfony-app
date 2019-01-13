@@ -54,7 +54,6 @@ class PhoneNumber
 
     public function __construct()
     {
-        $this->contacts = new ArrayCollection();
         $this->tasks = new ArrayCollection();
     }
 
@@ -98,35 +97,6 @@ class PhoneNumber
 
         return $this;
     }
-
-    /**
-     * @return Collection|Contact[]
-     */
-    public function getContacts(): Collection
-    {
-        return $this->contacts;
-    }
-
-    public function addContact(Contact $contact): self
-    {
-        if (!$this->contacts->contains($contact)) {
-            $this->contacts[] = $contact;
-            $contact->addPhoneNumber($this);
-        }
-
-        return $this;
-    }
-
-    public function removeContact(Contact $contact): self
-    {
-        if ($this->contacts->contains($contact)) {
-            $this->contacts->removeElement($contact);
-            $contact->removePhoneNumber($this);
-        }
-
-        return $this;
-    }
-
 
     public function getIsHidden(): ?bool
     {
