@@ -57,11 +57,6 @@ class Location
     private $user;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $approved;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Task", mappedBy="location", cascade={"persist", "remove"})
      */
     private $task;
@@ -70,6 +65,11 @@ class Location
      * @ORM\ManyToMany(targetEntity="App\Entity\Contact", mappedBy="location")
      */
     private $contacts;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isHidden;
 
     public function __construct()
     {
@@ -206,6 +206,18 @@ class Location
             $this->contacts->removeElement($contact);
             $contact->removeLocation($this);
         }
+
+        return $this;
+    }
+
+    public function getIsHidden(): ?bool
+    {
+        return $this->isHidden;
+    }
+
+    public function setIsHidden(?bool $isHidden): self
+    {
+        $this->isHidden = $isHidden;
 
         return $this;
     }

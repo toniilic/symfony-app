@@ -41,15 +41,15 @@ class LocationController extends AbstractController
             ->add('postalCode', TextType::class)
             ->add('city', ChoiceType::class, array(
                 'choices'  => array(
-                    'Rijeka' => 'rijeka',
+                    'Rijeka' => 'Rijeka',
                     'Zagreb' => 'Zagreb',
-                    'Pula' => 'pula',
+                    'Pula' => 'Pula',
                 ),
             ))
             ->add('region', ChoiceType::class, array(
                 'choices'  => array(
-                    'Primorsko goranska' => 'primorsko-goranska',
-                    'Zagrebačka' => 'zagrebacka'
+                    'Primorsko-goranska' => 'Primorsko-goranska',
+                    'Zagrebačka' => 'Zagrebačka'
                 ),
             ))
             ->add('save', SubmitType::class, array('label' => 'Create Location'))

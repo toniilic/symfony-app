@@ -6,12 +6,8 @@ use App\Entity\PhoneNumber;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Goutte\Client;
-use GuzzleHttp\Client as GuzzleClient;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -39,7 +35,7 @@ class PhoneNumberController extends AbstractController
                     'Home' => 'home'
                 ),
             ))
-            ->add('save', SubmitType::class, array('label' => 'Create Location'))
+            ->add('save', SubmitType::class, array('label' => 'Create Phone Number'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -54,8 +50,6 @@ class PhoneNumberController extends AbstractController
              $entityManager = $this->getDoctrine()->getManager();
              $entityManager->persist($phoneNumber);
              $entityManager->flush();
-
-             dump('redirect to home');
 
             return $this->redirectToRoute('home');
         }
