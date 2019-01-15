@@ -32,12 +32,20 @@ class PhoneNumberFixtures extends Fixture implements ContainerAwareInterface, Or
             false);
         $this->makePhoneNumber($manager, $this->getReference(UserFixtures::PUBLISHER2_REFERENCE), 'home',
             false);
+        $this->makePhoneNumber($manager, $this->getReference(UserFixtures::USER_REFERENCE), 'home',
+            false);
+        $this->makePhoneNumber($manager, $this->getReference(UserFixtures::USER2_REFERENCE), 'home',
+            false);
+        $this->makePhoneNumber($manager, $this->getReference(UserFixtures::MODERATOR_REFERENCE), 'mobile',
+            false);
+        $this->makePhoneNumber($manager, $this->getReference(UserFixtures::ADMIN_USER_REFERENCE), 'mobile',
+            false);
 
 
         $manager->flush();
     }
 
-    private function makePhoneNumber($manager, $user, $type, $isHidden)
+    private function makePhoneNumber(&$manager, $user, $type, $isHidden)
     {
         $phoneNumber = new PhoneNumber();
         $phoneNumber->setUser($user);

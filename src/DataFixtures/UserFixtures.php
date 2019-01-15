@@ -12,7 +12,7 @@ class UserFixtures extends Fixture implements ContainerAwareInterface, OrderedFi
 {
     public const ADMIN_USER_REFERENCE = 'admin-user';
     public const PUBLISHER_REFERENCE = 'publisher-user';
-    public const PUBLISHER2_REFERENCE = 'publisher-user';
+    public const PUBLISHER2_REFERENCE = 'publisher2-user';
     public const USER_REFERENCE = 'user-user';
     public const USER2_REFERENCE = 'user2-user';
     public const MODERATOR_REFERENCE = 'moderator-user';
