@@ -11,6 +11,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class UserFixtures extends Fixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
     public const ADMIN_USER_REFERENCE = 'admin-user';
+    public const PUBLISHER_REFERENCE = 'publisher-user';
+    public const PUBLISHER2_REFERENCE = 'publisher-user';
     public const USER_REFERENCE = 'user-user';
     public const USER2_REFERENCE = 'user2-user';
     public const MODERATOR_REFERENCE = 'moderator-user';
@@ -33,6 +35,10 @@ class UserFixtures extends Fixture implements ContainerAwareInterface, OrderedFi
 
         $admin = $this->makeUser($manager, 'admin', 'admin@domain.com', 'admin', ['ROLE_ADMIN']);
         $this->addReference(self::ADMIN_USER_REFERENCE, $admin);
+        $publisher = $this->makeUser($manager, 'publisher', 'publisher@domain.com', 'publisher', ['ROLE_USER']);
+        $this->addReference(self::PUBLISHER_REFERENCE, $publisher);
+        $publisher2 = $this->makeUser($manager, 'publisher2', 'publisher2@domain.com', 'publisher2', ['ROLE_USER']);
+        $this->addReference(self::PUBLISHER2_REFERENCE, $publisher2);
         $user = $this->makeUser($manager, 'user', 'user@domain.com', 'user', ['ROLE_USER']);
         $this->addReference(self::USER_REFERENCE, $user);
         $user2 = $this->makeUser($manager, 'user2', 'user2@domain.com', 'user2', ['ROLE_USER']);

@@ -11,10 +11,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LocationFixtures extends Fixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
-    public const ADMIN_USER_REFERENCE = 'admin-user';
-    public const USER_REFERENCE = 'user-user';
-    public const USER2_REFERENCE = 'user2-user';
-    public const MODERATOR_REFERENCE = 'moderator-user';
 
     /**
      * @var ContainerInterface
@@ -35,7 +31,10 @@ class LocationFixtures extends Fixture implements ContainerAwareInterface, Order
             51000, 'HRK', $this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $this->makeLocation($manager, 'Croatia', 'Primorsko-Goranska', 'Rijeka', 'Address 35',
             51000, 'HRK', $this->getReference(UserFixtures::USER_REFERENCE));
-
+        $this->makeLocation($manager, 'Croatia', 'Primorsko-Goranska', 'Rijeka', 'Address 36',
+            51000, 'HRK', $this->getReference(UserFixtures::USER2_REFERENCE));
+        $this->makeLocation($manager, 'Croatia', 'Primorsko-Goranska', 'Rijeka', 'Address 37',
+            51000, 'HRK', $this->getReference(UserFixtures::MODERATOR_REFERENCE));
 
         $manager->flush();
     }
