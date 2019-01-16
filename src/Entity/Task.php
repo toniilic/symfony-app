@@ -23,7 +23,7 @@ class Task
     private $title;
 
     /**
-     * @ORM\Column(type="text", length=255)
+     * @ORM\Column(type="text", length=1500)
      */
     private $description;
 
@@ -44,6 +44,8 @@ class Task
      * @ORM\JoinColumn(nullable=false)
      */
     private $phoneNumber;
+
+    public const LEVEL_OF_EXPERTIES_NOVICE = 'novice';
 
     /**
      * @ORM\Column(type="string", length=255)

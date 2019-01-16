@@ -11,6 +11,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class CategoryFixtures extends Fixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
+    public const CLEANING_CATEGORY_REFERENCE = 'cleaning-category';
+
     /**
      * @var ContainerInterface
      */
@@ -26,7 +28,8 @@ class CategoryFixtures extends Fixture implements ContainerAwareInterface, Order
 
     public function load(ObjectManager $manager)
     {
-        $this->makeCategory($manager, 'Delivery');
+        $category = $this->makeCategory($manager, 'Delivery');
+        $this->addReference(self::CLEANING_CATEGORY_REFERENCE, $category);
         $this->makeCategory($manager,'Cleaning');
         $this->makeCategory($manager,'Repair and construction');
         $this->makeCategory($manager,'Domestic services');
@@ -51,6 +54,7 @@ class CategoryFixtures extends Fixture implements ContainerAwareInterface, Order
 
         $manager->persist($category);
 
+        return $category;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Task;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -27,14 +28,24 @@ class TaskFixtures extends Fixture implements ContainerAwareInterface, OrderedFi
 
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
-        //$this->makeTask(&$manager, $this->getReference(UserFixtures::PUBLISHER_REFERENCE));
+        $description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Aliquam sagittis accumsan nisi ac tempor. Cras arcu ex, bibendum dapibus 
+        dui et, fringilla laoreet lacus.';
+
+        $dueDate = new Datetime('now + 18 days');
+
+        $this->makeTask($manager, $this->getReference(UserFixtures::PUBLISHER_REFERENCE), $description,
+            'Lorem Lipsum Dolor', 100, $this->getReference(CategoryFixtures::CLEANING_CATEGORY_REFERENCE),
+                $dueDate, Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
+        $this->makeTask($manager, $this->getReference(UserFixtures::PUBLISHER2_REFERENCE), $description,
+            'Lorem Lipsum Dolor', 100, $this->getReference(CategoryFixtures::CLEANING_CATEGORY_REFERENCE),
+            $dueDate, Task::LEVEL_OF_EXPERTIES_NOVICE, 20);
 
         $manager->flush();
     }
 
-    private function makeTask($manager, User $user)
+    private function makeTask(&$manager, User $user, $description, $title, $budget, $category, $dueDate,
+                              $levelOfExpertise, $duration, $approved = true)
     {
         $task = new Task();
         $task->setUser($user);
@@ -45,12 +56,10 @@ class TaskFixtures extends Fixture implements ContainerAwareInterface, OrderedFi
         $task->setDueDate($dueDate);
         $task->setLevelOfExpertise($levelOfExpertise);
         $task->setDuration($duration);
-        $task->setLocation($user->getLocation());
         $task->setPhoneNumber($user->getPhoneNumbers()[0]);
-        $task->
+        $task->setApproved($approved);
 
         $manager->persist($task);
-        $manager->flush();
     }
 
 
