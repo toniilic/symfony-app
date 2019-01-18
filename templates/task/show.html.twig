@@ -10,7 +10,7 @@
     <p>
         {{ task.description }}
     </p>
-    {% if is_owner != true or taskApplication is not null %}
+    {% if (is_owner != true) and (taskApplication == null) %}
     <small class="d-block text-right mt-3">
         <a href="{{ path('task_application', {'id':task.id}) }}">
             <button type="button" class="btn btn-primary">Apply</button>
@@ -57,7 +57,7 @@
     <h6 class="border-bottom border-gray pb-2 mb-0">Your Application</h6>
 
     <h2>
-        {{ taskApplication.hourlyRate }} {{ task.user.location.currency }}
+        {{ taskApplication.hourlyRate }} {{ task.user.location.currency }} / Sat
     </h2>
     <p>
         {{ taskApplication.coverLetter }}
