@@ -7,7 +7,9 @@ use App\Entity\Location;
 use App\Entity\PhoneNumber;
 use App\Entity\Task;
 use App\Entity\User;
+use DateTime;
 use Doctrine\ORM\EntityRepository;
+use IntlDateFormatter;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -27,7 +29,7 @@ class TaskController extends AbstractController
     /**
     * @Route("/create", name="task_create")
     */
-    public function index(Request $request)
+    public function create(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -68,7 +70,9 @@ class TaskController extends AbstractController
             ))
             ->add('budget', IntegerType::class)
             ->add('duration', IntegerType::class)
-            ->add('dueDate', DateTimeType::class)
+            ->add('dueDate', DateTimeType::class, array(
+                'years' => range(date('Y'), date('Y')+2)
+            ))
             ->add('save', SubmitType::class, array('label' => 'Create Task'))
             ->getForm();
 
@@ -82,7 +86,6 @@ class TaskController extends AbstractController
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             $entityManager = $this->getDoctrine()->getManager();
-            dump($task);
             $entityManager->persist($task);
             $entityManager->flush();
 
@@ -96,10 +99,16 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/show_task", name="task_show")
+     * @Route("/show/{id}", name="task_show")
      */
-    public function show()
+    public function show(Task $task)
     {
-        return $this->render('task/show.html.twig');
+        $is_owner = $task->getUser() == $this->getUser();
+        dump($task);
+        dump($is_owner);
+        return $this->render('task/show.html.twig', [
+            'task' => $task,
+            'is_owner' => $is_owner
+        ]);
     }
 }

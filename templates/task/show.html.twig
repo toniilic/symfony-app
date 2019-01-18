@@ -5,11 +5,16 @@
 
 <div class="my-3 p-3 bg-white rounded shadow-sm">
     <h2>
-        Lorem ipsum dolor sit amet
+        {{ task.title }}
     </h2>
+    <p>
+        {{ task.description }}
+    </p>
+    {% if is_owner != true %}
     <small class="d-block text-right mt-3">
-        <a href="#">Go to link</a>
+        <button type="button" class="btn btn-primary">Apply</button>
     </small>
+    {% endif %}
 </div>
 
 <div class="my-3 p-3 bg-white rounded shadow-sm">

@@ -22,7 +22,7 @@ class HomeController extends AbstractController
 
         $tasks = $repository->findByExampleField();
 
-        dump($tasks);
+        dump($repository);
 
         return $this->render('home/index.html.twig', array(
             'tasks' => $tasks

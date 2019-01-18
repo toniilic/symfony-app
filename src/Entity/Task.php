@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TaskRepository")
@@ -24,6 +25,13 @@ class Task
 
     /**
      * @ORM\Column(type="text", length=1500)
+     *
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 1500,
+     *      minMessage = "Your description must be at least {{ limit }} characters long",
+     *      maxMessage = "Your description cannot be longer than {{ limit }} characters"
+     * )
      */
     private $description;
 

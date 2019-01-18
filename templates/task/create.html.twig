@@ -5,7 +5,7 @@
 
 <div class="my-3 p-3 bg-white rounded shadow-sm">
 
-    {% if location.isHidden == false %}
+    {% if islocation.isHidden is defined %}
         <small class="d-block text-right mt-3">
             {{ location.country }},
             {{ location.region }},

@@ -161,34 +161,6 @@ class Location
         return $this;
     }
 
-    /**
-     * @return Collection|Contact[]
-     */
-    public function getContacts(): Collection
-    {
-        return $this->contacts;
-    }
-
-    public function addContact(Contact $contact): self
-    {
-        if (!$this->contacts->contains($contact)) {
-            $this->contacts[] = $contact;
-            $contact->addLocation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeContact(Contact $contact): self
-    {
-        if ($this->contacts->contains($contact)) {
-            $this->contacts->removeElement($contact);
-            $contact->removeLocation($this);
-        }
-
-        return $this;
-    }
-
     public function getIsHidden(): ?bool
     {
         return $this->isHidden;
