@@ -35,6 +35,11 @@ class User extends BaseUser
      */
     private $tasks;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\TaskApplication", inversedBy="submitter")
+     */
+    private $taskApplication;
+
 
     public function __construct()
     {
@@ -95,6 +100,18 @@ class User extends BaseUser
                 $task->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTaskApplication(): ?TaskApplication
+    {
+        return $this->taskApplication;
+    }
+
+    public function setTaskApplication(?TaskApplication $taskApplication): self
+    {
+        $this->taskApplication = $taskApplication;
 
         return $this;
     }
