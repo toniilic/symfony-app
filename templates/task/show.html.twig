@@ -10,40 +10,61 @@
     <p>
         {{ task.description }}
     </p>
-    {% if is_owner != true %}
+    {% if is_owner != true or taskApplication is not null %}
     <small class="d-block text-right mt-3">
         <a href="{{ path('task_application', {'id':task.id}) }}">
             <button type="button" class="btn btn-primary">Apply</button>
         </a>
     </small>
     {% endif %}
+
+    <section class="row air-card-divider-sm">
+        <div class="col-lg-6">
+            <h4>Activity on this job</h4>
+
+            <ul class="list-unstyled">
+                <li class="justify-xs-md">
+        <span class="text-muted primary">
+            Proposals:
+            <a data-eo-popover-html-unsafe="This range includes relevant proposals, but does not include
+                    proposals that are withdrawn, declined, or archived. Please note that all
+                    proposals are accessible to clients on their applicants page." data-eo-popover-trigger="mouseenter" class="no-close-lg" eo-popover-id="1799"><span aria-hidden="true" class="text-success glyphicon air-icon-question-circle m-0-left"></span></a>
+        </span>
+                    Less than 5    </li>
+
+
+                <li class="justify-xs-md">
+                    <span class="primary text-muted">Interviewing:</span>
+                    0
+                </li>
+
+                <li class="justify-xs-md">
+                    <span class="primary text-muted">Invites sent:</span>
+                    0
+                </li>
+                <li class="justify-xs-md">
+                    <span class="primary text-muted">Unanswered invites:</span>
+                    0
+                </li>
+
+            </ul>                    </div>
+        <div data-bids="~01cbec8cbbe68b4505" data-enough-applicants-for-upgrade-hint="false" data-bid-range-visible="false" data-is-owner="false" data-is-client="false" data-opening-uid="1086316385227194368" class="col-lg-12"><!----></div>
+    </section>
 </div>
 
+{% if taskApplication is not null %}
 <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Comments</h6>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Your Application</h6>
 
-        <div id="disqus_thread"></div>
-        <script>
+    <h2>
+        {{ taskApplication.hourlyRate }} {{ task.user.location.currency }}
+    </h2>
+    <p>
+        {{ taskApplication.coverLetter }}
+    </p>
 
-            /**
-             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-            /*
-            var disqus_config = function () {
-            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-            */
-            (function() { // DON'T EDIT BELOW THIS LINE
-                var d = document, s = d.createElement('script');
-                s.src = 'https://localhost-poxmgoyrzv.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-
+</div>
+{% endif %}
 
 {% endblock %}
 

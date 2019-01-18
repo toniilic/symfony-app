@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Location;
 use App\Entity\PhoneNumber;
 use App\Entity\Task;
+use App\Entity\TaskApplication;
 use App\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
@@ -103,12 +104,27 @@ class TaskController extends AbstractController
      */
     public function show(Task $task)
     {
-        $is_owner = $task->getUser() == $this->getUser();
-        dump($task);
-        dump($is_owner);
+        $user = $this->getUser();
+
+        $is_owner = $user == $task->getUser();
+
+        // get users task application for this task
+        $location = $this->getDoctrine()
+            ->getRepository(Location::class)
+            ->findLocationByUser($task->getUser());
+
+        // get users task application for this task
+        $taskApplication = $this->getDoctrine()
+            ->getRepository(TaskApplication::class)
+            ->findTaskApplicationByTaskAndSubmitter($task, $user);
+
+        dump($taskApplication);
+
         return $this->render('task/show.html.twig', [
             'task' => $task,
-            'is_owner' => $is_owner
+            'is_owner' => $is_owner,
+            'taskApplication' => $taskApplication,
+            'location' => $location
         ]);
     }
 }

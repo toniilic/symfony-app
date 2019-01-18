@@ -19,18 +19,6 @@ class TaskApplication
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Task", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $task;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $owner;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $hourlyRate;
@@ -46,7 +34,19 @@ class TaskApplication
     private $taskApplicationMessages;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Task", inversedBy="taskApplications")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $task;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="taskApplications")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="taskApplicationsSubmitted")
      * @ORM\JoinColumn(nullable=false)
      */
     private $submitter;
@@ -61,31 +61,7 @@ class TaskApplication
     {
         return $this->id;
     }
-
-    public function getTask(): ?Task
-    {
-        return $this->task;
-    }
-
-    public function setTask(Task $task): self
-    {
-        $this->task = $task;
-
-        return $this;
-    }
-
-    public function getOwner(): ?User
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(User $owner): self
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
+    
     public function getHourlyRate(): ?int
     {
         return $this->hourlyRate;
@@ -140,13 +116,37 @@ class TaskApplication
 
         return $this;
     }
+    
+    public function getTask(): ?Task
+    {
+        return $this->task;
+    }
+
+    public function setTask(?Task $task): self
+    {
+        $this->task = $task;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
 
     public function getSubmitter(): ?User
     {
         return $this->submitter;
     }
 
-    public function setSubmitter(User $submitter): self
+    public function setSubmitter(?User $submitter): self
     {
         $this->submitter = $submitter;
 

@@ -88,6 +88,16 @@ class Task
      */
     private $approved;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TaskApplication", mappedBy="task", orphanRemoval=true)
+     */
+    private $taskApplications;
+
+    public function __construct()
+    {
+        $this->taskApplications = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -221,6 +231,37 @@ class Task
     public function setApproved(?bool $approved): self
     {
         $this->approved = $approved;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TaskApplication[]
+     */
+    public function getTaskApplications(): Collection
+    {
+        return $this->taskApplications;
+    }
+
+    public function addTaskApplication(TaskApplication $taskApplication): self
+    {
+        if (!$this->taskApplications->contains($taskApplication)) {
+            $this->taskApplications[] = $taskApplication;
+            $taskApplication->setTask($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTaskApplication(TaskApplication $taskApplication): self
+    {
+        if ($this->taskApplications->contains($taskApplication)) {
+            $this->taskApplications->removeElement($taskApplication);
+            // set the owning side to null (unless already changed)
+            if ($taskApplication->getTask() === $this) {
+                $taskApplication->setTask(null);
+            }
+        }
 
         return $this;
     }

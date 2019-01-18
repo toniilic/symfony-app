@@ -40,12 +40,24 @@ class User extends BaseUser
      */
     private $taskApplication;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TaskApplication", mappedBy="owner", orphanRemoval=true)
+     */
+    private $taskApplications;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TaskApplication", mappedBy="submitter", orphanRemoval=true)
+     */
+    private $taskApplicationsSubmitted;
+
 
     public function __construct()
     {
         parent::__construct();
         $this->phoneNumbers = new ArrayCollection();
         $this->tasks = new ArrayCollection();
+        $this->taskApplications = new ArrayCollection();
+        $this->taskApplicationsSubmitted = new ArrayCollection();
     }
 
     /**
@@ -112,6 +124,68 @@ class User extends BaseUser
     public function setTaskApplication(?TaskApplication $taskApplication): self
     {
         $this->taskApplication = $taskApplication;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TaskApplication[]
+     */
+    public function getTaskApplications(): Collection
+    {
+        return $this->taskApplications;
+    }
+
+    public function addTaskApplication(TaskApplication $taskApplication): self
+    {
+        if (!$this->taskApplications->contains($taskApplication)) {
+            $this->taskApplications[] = $taskApplication;
+            $taskApplication->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTaskApplication(TaskApplication $taskApplication): self
+    {
+        if ($this->taskApplications->contains($taskApplication)) {
+            $this->taskApplications->removeElement($taskApplication);
+            // set the owning side to null (unless already changed)
+            if ($taskApplication->getOwner() === $this) {
+                $taskApplication->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TaskApplication[]
+     */
+    public function getTaskApplicationsSubmitted(): Collection
+    {
+        return $this->taskApplicationsSubmitted;
+    }
+
+    public function addTaskApplicationsSubmitted(TaskApplication $taskApplicationsSubmitted): self
+    {
+        if (!$this->taskApplicationsSubmitted->contains($taskApplicationsSubmitted)) {
+            $this->taskApplicationsSubmitted[] = $taskApplicationsSubmitted;
+            $taskApplicationsSubmitted->setSubmitter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTaskApplicationsSubmitted(TaskApplication $taskApplicationsSubmitted): self
+    {
+        if ($this->taskApplicationsSubmitted->contains($taskApplicationsSubmitted)) {
+            $this->taskApplicationsSubmitted->removeElement($taskApplicationsSubmitted);
+            // set the owning side to null (unless already changed)
+            if ($taskApplicationsSubmitted->getSubmitter() === $this) {
+                $taskApplicationsSubmitted->setSubmitter(null);
+            }
+        }
 
         return $this;
     }
