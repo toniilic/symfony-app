@@ -13,6 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Task
 {
+
+    public const LEVEL_OF_EXPERTIES_NOVICE = 'novice';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -54,8 +57,6 @@ class Task
      * @ORM\JoinColumn(nullable=false)
      */
     private $phoneNumber;
-
-    public const LEVEL_OF_EXPERTIES_NOVICE = 'novice';
 
     /**
      * @ORM\Column(type="string", length=255)
