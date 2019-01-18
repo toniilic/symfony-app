@@ -3,26 +3,49 @@
 namespace App\Controller;
 
 use App\Entity\Task;
-use App\Service\PosaoHrScraper;
-use App\Service\PosaoUrlScraper;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Goutte\Client;
 use GuzzleHttp\Client as GuzzleClient;
 
-class HomeController extends AbstractController
+class HomeController extends Controller
 {
     /**
     * @Route("/", name="home")
     */
-    public function index()
+    public function index(Request $request)
     {
-        $repository = $this->getDoctrine()->getRepository(Task::class);
+        // Retrieve the entity manager of Doctrine
+        $em = $this->getDoctrine()->getManager();
 
-        $tasks = $repository->findByExampleField();
+        // Get some repository of data, in our case we have an Tasks entity
+        $taskRepository = $em->getRepository(Task::class);
 
-        dump($repository);
+        // Find all the data on the Tasks table, filter your query as you need
+        $allTasksQuery = $taskRepository->createQueryBuilder('p')
+            ->where('p.approved != :approved')
+            ->setParameter('approved', 'false')
+            ->getQuery();
+
+        /* @var $paginator \Knp\Component\Pager\Paginator */
+        $paginator  = $this->get('knp_paginator');
+
+        // Paginate the results of the query
+        $tasks = $paginator->paginate(
+        // Doctrine Query, not results
+            $allTasksQuery,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            2
+        );
+
+
+
+
+
 
         return $this->render('home/index.html.twig', array(
             'tasks' => $tasks

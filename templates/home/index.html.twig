@@ -15,7 +15,9 @@
     </div>
     {% endfor %}
     <small class="d-block text-right mt-3">
-        <a href="#">All tasks</a>
+        <div class="navigation">
+        {{ knp_pagination_render(tasks) }}
+        </div>
     </small>
 </div>
 
