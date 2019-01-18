@@ -46,14 +46,14 @@ class TaskApplication
     private $taskApplicationMessages;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="taskApplication")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $submitter;
 
     public function __construct()
     {
         $this->taskApplicationMessages = new ArrayCollection();
-        $this->submitter = new ArrayCollection();
     }
 
 
@@ -141,35 +141,15 @@ class TaskApplication
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getSubmitter(): Collection
+    public function getSubmitter(): ?User
     {
         return $this->submitter;
     }
 
-    public function addSubmitter(User $submitter): self
+    public function setSubmitter(User $submitter): self
     {
-        if (!$this->submitter->contains($submitter)) {
-            $this->submitter[] = $submitter;
-            $submitter->setTaskApplication($this);
-        }
+        $this->submitter = $submitter;
 
         return $this;
     }
-
-    public function removeSubmitter(User $submitter): self
-    {
-        if ($this->submitter->contains($submitter)) {
-            $this->submitter->removeElement($submitter);
-            // set the owning side to null (unless already changed)
-            if ($submitter->getTaskApplication() === $this) {
-                $submitter->setTaskApplication(null);
-            }
-        }
-
-        return $this;
-    }
-
 }
