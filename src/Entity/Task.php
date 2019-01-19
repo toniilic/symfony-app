@@ -93,8 +93,17 @@ class Task
      */
     private $taskApplications;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $publishedAt;
+
     public function __construct()
     {
+        $this->publishedAt = new \DateTime();
+
         $this->taskApplications = new ArrayCollection();
     }
 
@@ -266,4 +275,13 @@ class Task
         return $this;
     }
 
+    public function getPublishedAt(): \DateTime
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(\DateTime $publishedAt): void
+    {
+        $this->publishedAt = $publishedAt;
+    }
 }

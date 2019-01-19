@@ -3,16 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class HomeController extends Controller
+class ModeratorController extends Controller
 {
     /**
-    * @Route("/", name="home")
-    */
+     * @Route("/moderator", name="moderator")
+     */
     public function index(Request $request)
     {
         // Retrieve the entity manager of Doctrine
@@ -22,10 +22,7 @@ class HomeController extends Controller
         $taskRepository = $em->getRepository(Task::class);
 
         // Find all the data on the Tasks table, filter your query as you need
-        $allTasksQuery = $taskRepository->createQueryBuilder('p')
-            ->where('p.approved != :approved')
-            ->setParameter('approved', 'false')
-            ->getQuery();
+        $allTasksQuery = $taskRepository->createQueryBuilder('p')->getQuery();
 
         /* @var $paginator \Knp\Component\Pager\Paginator */
         $paginator  = $this->get('knp_paginator');
@@ -40,17 +37,11 @@ class HomeController extends Controller
             2
         );
 
+        dump($tasks);
 
-        return $this->render('home/index.html.twig', array(
-            'tasks' => $tasks
-        ));
-    }
-
-    /**
-     * @Route("/show", name="show")
-     */
-    public function show()
-    {
-        return $this->render('home/show.html.twig');
+        return $this->render('moderator/index.html.twig', [
+            'controller_name' => 'ModeratorController',
+            'tasks' => $tasks,
+        ]);
     }
 }

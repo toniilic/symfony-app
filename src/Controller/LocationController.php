@@ -27,6 +27,19 @@ class LocationController extends AbstractController
 
         $user = $this->getUser();
 
+        // Retrieve the entity manager of Doctrine
+        $em = $this->getDoctrine()->getManager();
+        $locationRepository = $em->getRepository(Location::class);
+        $location = $locationRepository->findLocationByUser($user);
+        if($location) {
+            $this->addFlash(
+                'info',
+                'You already have a location! Edit it in your users dashboard.'
+            );
+
+            return $this->redirectToRoute('home');
+        }
+
         $location = new Location();
         $location->setCurrency('HRK');
         $location->setCountry('Croatia');
