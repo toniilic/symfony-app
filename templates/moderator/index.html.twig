@@ -23,11 +23,13 @@
             <td>@{{ task.user.username }}</td>
             <td>{{ task.publishedAt|date('Y-m-d H:m:s') }}</td>
             <td>
+                <a href="{{ path('moderator_edit', {'id':task.id}) }}">
                 {% if task.approved %}
                     <button type="button" class="btn btn-success">Approved</button>
                 {% else %}
                     <button type="button" class="btn btn-warning">Not approved</button>
                 {% endif %}
+                </a>
             </td>
         </tr>
         {% endfor %}

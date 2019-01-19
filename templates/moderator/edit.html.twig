@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<div class="my-3 p-3 bg-white rounded shadow-sm">
+
+    {% if islocation.isHidden is defined %}
+        <small class="d-block text-right mt-3">
+            {{ location.country }},
+            {{ location.region }},
+            {{ location.city }},
+            {{ location.address }},
+            {{ location.postalCode }},
+            {{ location.currency }}
+        </small>
+    {% endif %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <small class="d-block text-right mt-3">
+        <a href="#">Go to link</a>
+    </small>
+</div>
+
+
+
+{% endblock %}
+
+

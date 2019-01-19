@@ -118,13 +118,19 @@ class TaskController extends AbstractController
             ->getRepository(TaskApplication::class)
             ->findTaskApplicationByTaskAndSubmitter($task, $user);
 
-        dump($taskApplication);
+
+        $taskApplicationCount = $this->getDoctrine()
+            ->getRepository(TaskApplication::class)
+            ->getTaskApplicationsCount($task);
+
+        dump($taskApplicationCount);
 
         return $this->render('task/show.html.twig', [
             'task' => $task,
             'is_owner' => $is_owner,
             'taskApplication' => $taskApplication,
-            'location' => $location
+            'location' => $location,
+            'taskApplicationCount' => $taskApplicationCount,
         ]);
     }
 }

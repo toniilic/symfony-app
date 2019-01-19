@@ -47,6 +47,16 @@ class TaskApplicationRepository extends ServiceEntityRepository
             ;
     }
 
+    public function getTaskApplicationsCount($task)
+    {
+        return $this->createQueryBuilder('t')
+                    ->andWhere('t.task = :task')
+                    ->setParameter('task', $task)
+                    ->select('count(t.id)')
+                    ->getQuery()
+                    ->getSingleScalarResult();
+    }
+
     public function findOneBySomeField($value): ?TaskApplication
     {
         return $this->createQueryBuilder('t')
