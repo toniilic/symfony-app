@@ -39,18 +39,6 @@ class TaskApplication
      */
     private $task;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="taskApplications")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $owner;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="taskApplicationsSubmitted")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $submitter;
-
     public function __construct()
     {
         $this->taskApplicationMessages = new ArrayCollection();
@@ -125,30 +113,6 @@ class TaskApplication
     public function setTask(?Task $task): self
     {
         $this->task = $task;
-
-        return $this;
-    }
-
-    public function getOwner(): ?User
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(?User $owner): self
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-    public function getSubmitter(): ?User
-    {
-        return $this->submitter;
-    }
-
-    public function setSubmitter(?User $submitter): self
-    {
-        $this->submitter = $submitter;
 
         return $this;
     }

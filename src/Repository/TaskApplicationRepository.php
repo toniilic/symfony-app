@@ -35,7 +35,7 @@ class TaskApplicationRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findTaskApplicationByTaskAndSubmitter($task, $submitter): ?TaskApplication
+/*    public function findTaskApplicationByTaskAndSubmitter($task, $submitter): ?TaskApplication
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.task = :task')
@@ -45,7 +45,7 @@ class TaskApplicationRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult()
             ;
-    }
+    }*/
 
     public function getTaskApplicationsCount($task)
     {

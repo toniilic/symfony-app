@@ -23,8 +23,6 @@ class TaskApplicationController extends AbstractController
         $user = $this->getUser();
 
         $taskApplication = new TaskApplication();
-        $taskApplication->setSubmitter($user);
-        $taskApplication->setOwner($task->getUser());
         $taskApplication->setTask($task);
 
         $form = $this->createFormBuilder($taskApplication)
@@ -43,7 +41,9 @@ class TaskApplicationController extends AbstractController
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             $entityManager = $this->getDoctrine()->getManager();
+            $user->addTaskApplication($taskApplication);
             $entityManager->persist($taskApplication);
+            $entityManager->persist($user);
             $entityManager->flush();
 
             return $this->redirectToRoute('task_show', array('id' => $task->getId()));

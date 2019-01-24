@@ -27,7 +27,7 @@ class TaskApplicationMessage
     private $createAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TaskApplication", inversedBy="taskMessages")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TaskApplication", inversedBy="taskApplicationMessages")
      */
     private $taskApplication;
 

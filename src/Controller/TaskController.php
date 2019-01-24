@@ -114,10 +114,10 @@ class TaskController extends AbstractController
             ->findLocationByUser($task->getUser());
 
         // get users task application for this task
-        $taskApplication = $this->getDoctrine()
-            ->getRepository(TaskApplication::class)
-            ->findTaskApplicationByTaskAndSubmitter($task, $user);
-
+//        $taskApplication = $this->getDoctrine()
+//            ->getRepository(TaskApplication::class)
+//            ->findTaskApplicationByTaskAndSubmitter($task, $user);
+        // TODO: get current user application for this tasks
 
         $taskApplicationCount = $this->getDoctrine()
             ->getRepository(TaskApplication::class)
@@ -128,7 +128,7 @@ class TaskController extends AbstractController
         return $this->render('task/show.html.twig', [
             'task' => $task,
             'is_owner' => $is_owner,
-            'taskApplication' => $taskApplication,
+            //'taskApplication' => $taskApplication,
             'location' => $location,
             'taskApplicationCount' => $taskApplicationCount,
         ]);

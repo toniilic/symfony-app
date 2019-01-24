@@ -37,7 +37,7 @@ class ModeratorController extends Controller
         $taskRepository = $em->getRepository(Task::class);
 
         // Find all the data on the Tasks table, filter your query as you need
-        $allTasksQuery = $taskRepository->createQueryBuilder('p')->getQuery();
+        $allTasksQuery = $taskRepository->createQueryBuilder('p')->orderBy('p.id', 'DESC')->getQuery();
 
         /* @var $paginator \Knp\Component\Pager\Paginator */
         $paginator  = $this->get('knp_paginator');

@@ -36,20 +36,14 @@ class User extends BaseUser
     private $tasks;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TaskApplication", inversedBy="submitter")
-     */
-    private $taskApplication;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\TaskApplication", mappedBy="owner", orphanRemoval=true)
+     * Many Users have Many Task Applications.
+     * @ORM\ManyToMany(targetEntity="App\Entity\TaskApplication")
+     * @ORM\JoinTable(name="users_taskApplications",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="taskApplication_id", referencedColumnName="id")}
+     *      )
      */
     private $taskApplications;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\TaskApplication", mappedBy="submitter", orphanRemoval=true)
-     */
-    private $taskApplicationsSubmitted;
-
 
     public function __construct()
     {
@@ -57,7 +51,20 @@ class User extends BaseUser
         $this->phoneNumbers = new ArrayCollection();
         $this->tasks = new ArrayCollection();
         $this->taskApplications = new ArrayCollection();
-        $this->taskApplicationsSubmitted = new ArrayCollection();
+    }
+
+    public function addTaskApplications(Category $category)
+    {
+        if (!$this->taskApplications->contains($category))
+            $this->taskApplications->add($category);
+
+        return $this;
+    }
+
+    public function removeTaskApplications(Category $category)
+    {
+        if ($this->taskApplications->contains($category))
+            $this->taskApplications->remove($category);
     }
 
     /**
@@ -140,7 +147,6 @@ class User extends BaseUser
     {
         if (!$this->taskApplications->contains($taskApplication)) {
             $this->taskApplications[] = $taskApplication;
-            $taskApplication->setOwner($this);
         }
 
         return $this;
@@ -150,10 +156,6 @@ class User extends BaseUser
     {
         if ($this->taskApplications->contains($taskApplication)) {
             $this->taskApplications->removeElement($taskApplication);
-            // set the owning side to null (unless already changed)
-            if ($taskApplication->getOwner() === $this) {
-                $taskApplication->setOwner(null);
-            }
         }
 
         return $this;
