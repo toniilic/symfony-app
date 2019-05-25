@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User extends BaseUser
 {
@@ -17,6 +18,7 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
      */
     protected $id;
 
@@ -186,6 +188,34 @@ class User extends BaseUser
             // set the owning side to null (unless already changed)
             if ($taskApplicationsSubmitted->getSubmitter() === $this) {
                 $taskApplicationsSubmitted->setSubmitter(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function addPhoneNumber(PhoneNumber $phoneNumber): self
+    {
+        if (!$this->phoneNumbers->contains($phoneNumber)) {
+            $this->phoneNumbers[] = $phoneNumber;
+            $phoneNumber->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhoneNumber(PhoneNumber $phoneNumber): self
+    {
+        if ($this->phoneNumbers->contains($phoneNumber)) {
+            $this->phoneNumbers->removeElement($phoneNumber);
+            // set the owning side to null (unless already changed)
+            if ($phoneNumber->getUser() === $this) {
+                $phoneNumber->setUser(null);
             }
         }
 

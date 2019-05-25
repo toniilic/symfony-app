@@ -8,6 +8,7 @@ use App\Entity\PhoneNumber;
 use App\Entity\Task;
 use App\Entity\TaskApplication;
 use App\Entity\User;
+use App\Repository\TaskRepository;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 use IntlDateFormatter;
@@ -119,14 +120,36 @@ class TaskController extends AbstractController
 //            ->findTaskApplicationByTaskAndSubmitter($task, $user);
         // TODO: get current user application for this tasks
 
-        $taskApplicationCount = $this->getDoctrine()
-            ->getRepository(TaskApplication::class)
-            ->getTaskApplicationsCount($task);
+        $taskApplicationRepo = $this->getDoctrine()
+            ->getRepository(TaskApplication::class);
+        $taskApplicationCount = $taskApplicationRepo->getTaskApplicationsCount($task);
 
-        dump($taskApplicationCount);
+        /** @var TaskRepository $taskRepo */
+        $taskRepo = $this->getDoctrine()
+            ->getRepository(Task::class);
+
+        /** @var @var UserRepository $userRepo */
+        $userRepo = $this->getDoctrine()
+            ->getRepository(User::class);
+
+        $em = $this->getDoctrine()->getManager()->getRepository(User::class)->findOneBy(['id'=>1]);
+
+        dump($task);
+        dump($task->getUser()->getId());
+        dump($userRepo->getById($task->getUser()->getId()));
+        dump($this->getUser());
+        dump($task->getCategory());
+        dump($task->getCategory()->getTasks());
+        dump($task->getPhoneNumber());
+
+        /**
+         * TODO: show category,
+         */
 
         return $this->render('task/show.html.twig', [
             'task' => $task,
+            'category' => $task->getCategory(),
+            'phoneNumber' => $task->getPhoneNumber(),
             'is_owner' => $is_owner,
             //'taskApplication' => $taskApplication,
             'location' => $location,

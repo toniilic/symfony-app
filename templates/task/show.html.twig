@@ -31,10 +31,10 @@
                 </li>
 
 
-                <li class="justify-xs-md">
+                {#<li class="justify-xs-md">
                     <span class="primary text-muted">Interviewing:</span>
                     TODO
-                </li>
+                </li>#}
 
 
             </ul>
@@ -55,6 +55,63 @@
     </p>
 
 </div>
+
+<div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Details</h6>
+
+    <table class="table">
+{#        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+        </thead>#}
+        <tbody>
+        <tr>
+            <th scope="row">Category</th>
+            <td>{{ category.getTitle }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Phone number</th>
+            <td>{{ phoneNumber.getNumber }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Level of expertise</th>
+            <td>{{ task.levelOfExpertise }}</td>
+        </tr>
+        {% if task.getDueDate is not null %}
+        <tr>
+            <th scope="row">Due date</th>
+            <td>{{ task.getDueDate|date("m/d/Y")  }}</td>
+        </tr>
+        {% endif %}
+        {% if task.location is not null %}
+            <tr>
+                <th scope="row">Location</th>
+                <td>{{ task.location }}</td>
+            </tr>
+        {% endif %}
+        {% if task.budget is not null %}
+            <tr>
+                <th scope="row">Budget</th>
+                <td>{{ task.budget }}$</td>
+            </tr>
+        {% endif %}
+        {% if task.duration is not null %}
+            <tr>
+                <th scope="row">Duration</th>
+                <td>{{ task.duration }} days</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+</div>
+
+
+
 
 
 {% endblock %}
