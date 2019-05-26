@@ -90,13 +90,17 @@
         {% if task.location is not null %}
             <tr>
                 <th scope="row">Location</th>
-                <td>{{ task.location }}</td>
+                <td>
+                    {{ task.location.country }},
+                    {{ task.location.city }}.
+                    {{ task.location.address }}.
+                </td>
             </tr>
         {% endif %}
         {% if task.budget is not null %}
             <tr>
                 <th scope="row">Budget</th>
-                <td>{{ task.budget }}$</td>
+                <td>{{ task.budget }} HRK</td>
             </tr>
         {% endif %}
         {% if task.duration is not null %}

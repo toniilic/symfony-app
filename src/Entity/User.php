@@ -38,14 +38,9 @@ class User extends BaseUser
     private $tasks;
 
     /**
-     * Many Users have Many Task Applications.
-     * @ORM\ManyToMany(targetEntity="App\Entity\TaskApplication")
-     * @ORM\JoinTable(name="users_taskApplications",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="taskApplication_id", referencedColumnName="id")}
-     *      )
+     * @ORM\ManyToMany(targetEntity="App\Entity\TaskApplication", mappedBy="user")
      */
-    private $taskApplications;
+    private $taskApplication;
 
     public function __construct()
     {
@@ -53,6 +48,7 @@ class User extends BaseUser
         $this->phoneNumbers = new ArrayCollection();
         $this->tasks = new ArrayCollection();
         $this->taskApplications = new ArrayCollection();
+        $this->taskApplication = new ArrayCollection();
     }
 
     public function addTaskApplications(Category $category)
@@ -147,8 +143,8 @@ class User extends BaseUser
 
     public function addTaskApplication(TaskApplication $taskApplication): self
     {
-        if (!$this->taskApplications->contains($taskApplication)) {
-            $this->taskApplications[] = $taskApplication;
+        if (!$this->taskApplication->contains($taskApplication)) {
+            $this->taskApplication[] = $taskApplication;
         }
 
         return $this;
@@ -156,8 +152,8 @@ class User extends BaseUser
 
     public function removeTaskApplication(TaskApplication $taskApplication): self
     {
-        if ($this->taskApplications->contains($taskApplication)) {
-            $this->taskApplications->removeElement($taskApplication);
+        if ($this->taskApplication->contains($taskApplication)) {
+            $this->taskApplication->removeElement($taskApplication);
         }
 
         return $this;

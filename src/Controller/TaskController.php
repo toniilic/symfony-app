@@ -115,10 +115,23 @@ class TaskController extends AbstractController
             ->findLocationByUser($task->getUser());
 
         // get users task application for this task
-//        $taskApplication = $this->getDoctrine()
-//            ->getRepository(TaskApplication::class)
-//            ->findTaskApplicationByTaskAndSubmitter($task, $user);
+        dump($user);
+        $taskApplications = $this->getDoctrine()
+            ->getRepository(TaskApplication::class)
+            ->findTaskApplicationByTaskAndSubmitter($task, $user);
         // TODO: get current user application for this tasks
+        dump($taskApplications);
+        foreach($taskApplications as $taskApplication) {
+            dump($taskApplication);
+            $users = $taskApplication->getUser();
+            dump($users);
+            dump(dump(iterator_to_array($users)));
+
+            /*
+            foreach($users as $user) {
+                dump($user);
+            }*/
+        }
 
         $taskApplicationRepo = $this->getDoctrine()
             ->getRepository(TaskApplication::class);
@@ -134,13 +147,15 @@ class TaskController extends AbstractController
 
         $em = $this->getDoctrine()->getManager()->getRepository(User::class)->findOneBy(['id'=>1]);
 
-        dump($task);
+        /*dump($task);
         dump($task->getUser()->getId());
         dump($userRepo->getById($task->getUser()->getId()));
         dump($this->getUser());
         dump($task->getCategory());
         dump($task->getCategory()->getTasks());
-        dump($task->getPhoneNumber());
+        dump($task->getPhoneNumber());*/
+        /*dump($taskApplication);*/
+        // TODO: get Task application by current user
 
         /**
          * TODO: show category,

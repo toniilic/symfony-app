@@ -39,9 +39,15 @@ class TaskApplication
      */
     private $task;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="taskApplication")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->taskApplicationMessages = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
 
@@ -113,6 +119,32 @@ class TaskApplication
     public function setTask(?Task $task): self
     {
         $this->task = $task;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->user->contains($user)) {
+            $this->user->removeElement($user);
+        }
 
         return $this;
     }
