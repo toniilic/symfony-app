@@ -119,6 +119,9 @@ class TaskController extends AbstractController
             ->getRepository(TaskApplication::class)
             ->findTaskApplicationsByTask($task);
         // TODO: get current user application for this tasks
+        $currentUserAlredySubmitted = false;
+        $currentUserSubmission = null;
+
         foreach($taskApplications as $taskApplication) {
 
             $taskApplications = $taskApplication->getUser()->getValues();

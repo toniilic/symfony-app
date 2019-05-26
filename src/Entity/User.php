@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Captcha\Bundle\CaptchaBundle\Validator\Constraints as CaptchaAssert;
 
 /**
  * @ORM\Entity
@@ -21,6 +22,13 @@ class User extends BaseUser
      *
      */
     protected $id;
+
+    /**
+     * @CaptchaAssert\ValidCaptcha(
+     *      message = "CAPTCHA validation failed, try again."
+     * )
+     */
+    protected $captchaCode;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\PhoneNumber", mappedBy="user")
@@ -57,6 +65,16 @@ class User extends BaseUser
             $this->taskApplications->add($category);
 
         return $this;
+    }
+
+    public function getCaptchaCode()
+    {
+        return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+        $this->captchaCode = $captchaCode;
     }
 
     public function removeTaskApplications(Category $category)
