@@ -115,22 +115,20 @@ class TaskController extends AbstractController
             ->findLocationByUser($task->getUser());
 
         // get users task application for this task
-        dump($user);
         $taskApplications = $this->getDoctrine()
             ->getRepository(TaskApplication::class)
-            ->findTaskApplicationByTaskAndSubmitter($task, $user);
+            ->findTaskApplicationsByTask($task);
         // TODO: get current user application for this tasks
-        dump($taskApplications);
         foreach($taskApplications as $taskApplication) {
-            dump($taskApplication);
-            $users = $taskApplication->getUser();
-            dump($users);
-            dump(dump(iterator_to_array($users)));
 
-            /*
-            foreach($users as $user) {
-                dump($user);
-            }*/
+            $taskApplications = $taskApplication->getUser()->getValues();
+
+            foreach($taskApplications as $taskApplicationUser) {
+                if($taskApplicationUser == $user) {
+                    $currentUserAlredySubmitted = true;
+                    $currentUserSubmission = $taskApplication;
+                }
+            }
         }
 
         $taskApplicationRepo = $this->getDoctrine()
@@ -161,6 +159,9 @@ class TaskController extends AbstractController
          * TODO: show category,
          */
 
+        dump($currentUserAlredySubmitted);
+        dump($currentUserSubmission);
+
         return $this->render('task/show.html.twig', [
             'task' => $task,
             'category' => $task->getCategory(),
@@ -169,6 +170,9 @@ class TaskController extends AbstractController
             //'taskApplication' => $taskApplication,
             'location' => $location,
             'taskApplicationCount' => $taskApplicationCount,
+            'currentUserAlredySubmitted' => $currentUserAlredySubmitted,
+            'currentUserSubmission' => $currentUserSubmission
+
         ]);
     }
 }

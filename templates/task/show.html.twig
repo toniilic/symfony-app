@@ -10,7 +10,7 @@
     <p>
         {{ task.description }}
     </p>
-    {% if (is_owner != true) %}
+    {% if (is_owner != true and currentUserAlredySubmitted != true) %}
     <small class="d-block text-right mt-3">
         <a href="{{ path('task_application', {'id':task.id}) }}">
             <button type="button" class="btn btn-primary">Apply</button>
@@ -48,10 +48,10 @@
     <h6 class="border-bottom border-gray pb-2 mb-0">Your Application</h6>
 
     <h2>
-        56 HRK / Sat
+        {{ currentUserSubmission.hourlyRate }} HRK / Sat
     </h2>
     <p>
-        Lipsum
+        {{ currentUserSubmission.coverLetter }}
     </p>
 
 </div>
@@ -113,8 +113,6 @@
     </table>
 
 </div>
-
-
 
 
 

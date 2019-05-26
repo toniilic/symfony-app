@@ -35,11 +35,11 @@ class TaskApplicationRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findTaskApplicationByTaskAndSubmitter($task, $user): ?array
+    public function findTaskApplicationsByTask($task): ?array
     {
-        return $this->createQueryBuilder('t')
-            ->where('t.task = :task')
-            //->andWhere('t.user = :user')
+        return $this->createQueryBuilder('ta')
+            ->where('ta.task = :task')
+            //->andWhere('ta.user = :user')
             ->setParameter('task', $task)
             //->setParameter('user', $user)
             ->getQuery()
