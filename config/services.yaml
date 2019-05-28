@@ -29,3 +29,7 @@ services:
     App\Controller\SecurityController:
         decorates: 'fos_user.security.controller'
         arguments: ['@security.csrf.token_manager']
+    app.form.registration:
+        class: App\Form\Type\RegistrationFormType
+        tags:
+            - { name: form.type, alias: app_user_registration }

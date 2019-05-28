@@ -5,3 +5,6 @@ fos_user:
   from_email:
     address: "notwillincurrently@gmail.com"
     sender_name: "notwillincurrently@gmail.com"
+  registration:
+    form:
+      type: App\Form\Type\RegistrationFormType
