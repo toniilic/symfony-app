@@ -13,8 +13,35 @@ class HomeController extends Controller
     /**
     * @Route("/", name="home")
     */
-    public function index(Request $request)
+    public function index(Request $request, \Swift_Mailer $mailer)
     {
+/*        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('toniilicdeveloper@gmail.com')
+            ->setTo('toniilicdeveloper@gmail.com')
+            ->setBody(
+                $this->renderView(
+                // templates/emails/registration.html.twig
+                    'emails/registration.html.twig',
+                    ['name' => 'Toni']
+                ),
+                'text/html'
+            )
+            /*
+             * If you also want to include a plaintext version of the message
+            ->addPart(
+                $this->renderView(
+                    'emails/registration.txt.twig',
+                    ['name' => $name]
+                ),
+                'text/plain'
+            )
+            */
+        /*;
+
+        $mailer->send($message);*/
+
+
+
         // Retrieve the entity manager of Doctrine
         $em = $this->getDoctrine()->getManager();
 

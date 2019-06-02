@@ -179,6 +179,15 @@
     "silex/silex": {
         "version": "v2.3.0"
     },
+    "sonata-project/doctrine-orm-admin-bundle": {
+        "version": "3.9.0"
+    },
+    "sonata-project/easy-extends-bundle": {
+        "version": "2.5.0"
+    },
+    "sonata-project/user-bundle": {
+        "version": "4.3.0"
+    },
     "swiftmailer/swiftmailer": {
         "version": "v6.1.3"
     },

@@ -1,4 +1,4 @@
-<?php if (!class_exists('CaptchaConfiguration')) { return; }
+<?php /*if (!class_exists('CaptchaConfiguration')) { return; }
 
 // BotDetect PHP Captcha configuration options
 
@@ -21,4 +21,4 @@ return [
         'CodeStyle' => CodeStyle::Alpha,
     ],
 
-];
+];*/

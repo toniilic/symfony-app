@@ -33,3 +33,29 @@ services:
         class: App\Form\Type\RegistrationFormType
         tags:
             - { name: form.type, alias: app_user_registration }
+    App\Bundle\UserBundle\Controller\ChangePasswordController:
+        decorates: 'fos_user.change_password.controller'
+        arguments:
+            $formFactory: '@fos_user.registration.form.factory'
+
+    App\Controller\ProfileController:
+        decorates: 'fos_user.profile.controller'
+        arguments:
+            $formFactory: '@fos_user.registration.form.factory'
+
+    admin.blog_post:
+        class: App\Admin\BlogPostAdmin
+        arguments: [~, App\Entity\BlogPost, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Blog post' }
+    admin.task:
+        class: App\Admin\TaskAdmin
+        arguments: [~, App\Entity\Task, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Task' }
+    admin.category:
+        class: App\Admin\CategoryAdmin
+        arguments: [~, App\Entity\Category, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Category }
+

@@ -28,24 +28,16 @@ class SecurityController extends BaseController
         $lastUsernameKey = Security::LAST_USERNAME;
 
         // get captcha object instance
-        $captcha = $this->get('captcha')->setConfig('LoginCaptcha');
+        /*$captcha = $this->get('captcha')->setConfig('LoginCaptcha');*/
 
         if ($request->isMethod('POST')) {
             // validate the user-entered Captcha code when the form is submitted
-            $captchaCode = $request->request->get('captchaCode');
+            /*$captchaCode = $request->request->get('captchaCode');
             $isHuman = $captcha->Validate($captchaCode);
-            if ($isHuman) {
+            if ($isHuman) {*/
                 // Captcha validation passed, check username and password
-                return $this->redirect($this->generateUrl('fos_user_security_check'), 307);
-            } else {
-                // Captcha validation failed, set an invalid captcha exception in $authErrorKey attribute
-                $invalidCaptchaEx = new InvalidCaptchaException('CAPTCHA validation failed, try again.');
-                $request->attributes->set($authErrorKey, $invalidCaptchaEx);
+            return $this->redirect($this->generateUrl('fos_user_security_check'), 307);
 
-                // set last username entered by the user
-                $username = $request->request->get('_username', null, true);
-                $request->getSession()->set($lastUsernameKey, $username);
-            }
         }
 
         // get the error if any (works with forward and redirect -- see below)
@@ -73,7 +65,7 @@ class SecurityController extends BaseController
             'last_username' => $lastUsername,
             'error' => $error,
             'csrf_token' => $csrfToken,
-            'captcha_html' => $captcha->Html()
+            //'captcha_html' => $captcha->Html()
         ));
     }
 }

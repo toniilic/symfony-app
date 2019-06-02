@@ -1,7 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<h2>Login Form Validation BotDetect CAPTCHA Example</h2>
-
 {% block stylesheets %}
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
 {% endblock %}
@@ -21,9 +19,9 @@
     <label for="password">{{ 'security.login.password'|trans }}</label>
     <input type="password" id="password" name="_password" required="required" autocomplete="current-password" />
 
-    {# show captcha image  #}
+    {# show captcha image  #}{#
     {{ captcha_html | raw  }}
-    <input type="text" id="captchaCode" name="captchaCode">
+    <input type="text" id="captchaCode" name="captchaCode">#}
 
     <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
     <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
@@ -31,8 +29,3 @@
     <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
 </form>
 
-<div style="margin-top:15px">
-    <ul >
-        <li><a href="./register">Register Form CAPTCHA Example</a></li>
-    </ul>
-</div>

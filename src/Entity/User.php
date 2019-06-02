@@ -23,12 +23,12 @@ class User extends BaseUser
      */
     protected $id;
 
-    /**
+/*    /**
      * @CaptchaAssert\ValidCaptcha(
      *      message = "CAPTCHA validation failed, try again."
      * )
      */
-    protected $captchaCode;
+/*    protected $captchaCode;*/
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\PhoneNumber", mappedBy="user")

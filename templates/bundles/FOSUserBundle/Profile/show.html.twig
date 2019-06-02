@@ -2,4 +2,5 @@
 
 {% block fos_user_content %}
 {% include "@FOSUser/Profile/show_content.html.twig" %}
+<a href="{{ path('fos_user_profile_edit') }}">{{ 'layout.edit'|trans({}, 'FOSUserBundle') }}</a>
 {% endblock fos_user_content %}
