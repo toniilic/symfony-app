@@ -20,8 +20,23 @@ class UserTaskApplicationController extends AbstractController
      */
     public function index(TaskApplicationRepository $taskApplicationRepository): Response
     {
+        $user = $this->getUser();
+        $taskApplications = $taskApplicationRepository->findTaskApplicationsByUser($user);
+
+        $taskApplicationsByUser = [];
+        foreach($taskApplications as $taskApplication) {
+            // TODO: refactor
+            $taskApplications = $taskApplication->getUser()->getValues();
+
+            foreach($taskApplications as $taskApplicationUser) {
+                if($taskApplicationUser == $user) {
+                    $taskApplicationsByUser[] = $taskApplication;
+                }
+            }
+        }
+
         return $this->render('user_task_application/index.html.twig', [
-            'task_applications' => $taskApplicationRepository->findAll(),
+            'task_applications' => $taskApplicationsByUser,
         ]);
     }
 
@@ -93,4 +108,6 @@ class UserTaskApplicationController extends AbstractController
 
         return $this->redirectToRoute('task_application_index');
     }
+
+
 }

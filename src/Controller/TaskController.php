@@ -126,7 +126,7 @@ class TaskController extends AbstractController
         $currentUserSubmission = null;
 
         foreach($taskApplications as $taskApplication) {
-
+            // TODO: refactor
             $taskApplications = $taskApplication->getUser()->getValues();
 
             foreach($taskApplications as $taskApplicationUser) {
