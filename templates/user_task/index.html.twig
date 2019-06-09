@@ -17,6 +17,7 @@
                 <th>DueDate</th>
                 <th>Approved</th>
                 <th>PublishedAt</th>
+                <th>Show applicatns</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -32,6 +33,11 @@
                 <td>{{ task.dueDate ? task.dueDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ task.approved ? 'Yes' : 'No' }}</td>
                 <td>{{ task.publishedAt ? task.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <button type="button" class="btn btn-primary">
+                        Applicants <span class="badge badge-light">{{ task.taskApplications | length }}</span>
+                    </button>
+                </td>
                 <td>
                     <a href="{{ path('user_task_show', {'id': task.id}) }}">show</a>
                     <a href="{{ path('user_task_edit', {'id': task.id}) }}">edit</a>
