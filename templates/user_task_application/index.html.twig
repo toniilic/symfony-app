@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>HourlyRate</th>
                 <th>CoverLetter</th>
+                <th>Task</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td>{{ task_application.id }}</td>
                 <td>{{ task_application.hourlyRate }}</td>
                 <td>{{ task_application.coverLetter }}</td>
+                <td><a href="{{ path('task_show', {'id': task_application.task.id}) }}" target="_blank">{{ task_application.task.title }}</a></td>
                 <td>
                     <a href="{{ path('task_application_show', {'id': task_application.id}) }}">show</a>
                     <a href="{{ path('task_application_edit', {'id': task_application.id}) }}">edit</a>
