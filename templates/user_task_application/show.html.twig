@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TaskApplication{% endblock %}
+
+{% block body %}
+    <h1>TaskApplication</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ task_application.id }}</td>
+            </tr>
+            <tr>
+                <th>HourlyRate</th>
+                <td>{{ task_application.hourlyRate }}</td>
+            </tr>
+            <tr>
+                <th>CoverLetter</th>
+                <td>{{ task_application.coverLetter }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('task_application_index') }}">back to list</a>
+
+    <a href="{{ path('task_application_edit', {'id': task_application.id}) }}">edit</a>
+
+    {{ include('task_application/_delete_form.html.twig') }}
+{% endblock %}
