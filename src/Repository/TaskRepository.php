@@ -44,12 +44,21 @@ class TaskRepository extends ServiceEntityRepository
             ;
     }
 
-    public function findTaskOwner($user): ?User
+    public function findTaskOwner($user)
     {
       return $this->createQueryBuilder('t')
                   ->where('t.user = :user')
                   ->setParameter('user', $user)
                   ->getQuery()
                   ->getOneOrNullResult();
+    }
+
+    public function findTasksByUser($user)
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
     }
 }

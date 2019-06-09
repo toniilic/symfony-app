@@ -20,8 +20,11 @@ class UserTaskController extends AbstractController
      */
     public function index(TaskRepository $taskRepository): Response
     {
+        $tasks = $taskRepository->findTasksByUser($this->getUser());
+        dump($tasks);
+
         return $this->render('user_task/index.html.twig', [
-            'tasks' => $taskRepository->findTaskOwner($this->getUser()),
+            'tasks' => $tasks,
         ]);
     }
 
