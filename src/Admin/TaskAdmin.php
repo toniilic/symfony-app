@@ -55,6 +55,7 @@ class TaskAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('title')
+            ->addIdentifier('user')
             ->add('approved')
         ;
     }
