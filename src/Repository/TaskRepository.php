@@ -50,6 +50,6 @@ class TaskRepository extends ServiceEntityRepository
                   ->where('t.user = :user')
                   ->setParameter('user', $user)
                   ->getQuery()
-                  ->getSingleScalarResult();
+                  ->getOneOrNullResult();
     }
 }

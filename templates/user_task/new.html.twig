@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Task{% endblock %}
+
+{% block body %}
+    <h1>Create new Task</h1>
+
+    {{ include('user_task/_form.html.twig') }}
+
+    <a href="{{ path('user_task_index') }}">back to list</a>
+{% endblock %}

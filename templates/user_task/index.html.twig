@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task index{% endblock %}
+
+{% block body %}
+    <h1>Task index</h1>
+    {% if tasks is defined %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>LevelOfExpertise</th>
+                <th>Budget</th>
+                <th>Duration</th>
+                <th>DueDate</th>
+                <th>Approved</th>
+                <th>PublishedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.levelOfExpertise }}</td>
+                <td>{{ task.budget }}</td>
+                <td>{{ task.duration }}</td>
+                <td>{{ task.dueDate ? task.dueDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ task.approved ? 'Yes' : 'No' }}</td>
+                <td>{{ task.publishedAt ? task.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('user_task_show', {'id': task.id}) }}">show</a>
+                    <a href="{{ path('user_task_edit', {'id': task.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Not tasks defined</p>
+    {% endif %}
+
+    <a href="{{ path('task_create') }}">Create new</a>
+{% endblock %}
