@@ -94,7 +94,7 @@ class TaskController extends AbstractController
 
             $this->addFlash('warning', 'You task has been submitted and is waiting for approval.');
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('user_task_index');
         }
 
         return $this->render('task/create.html.twig', array(
