@@ -284,4 +284,8 @@ class Task
     {
         $this->publishedAt = $publishedAt;
     }
+
+    public function __toString() {
+        return $this->title;
+    }
 }
