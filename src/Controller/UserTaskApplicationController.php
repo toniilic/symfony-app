@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserTaskApplicationController extends AbstractController
 {
     /**
-     * @Route("/", name="task_application_index", methods={"GET"})
+     * @Route("/", name="user_task_application_index", methods={"GET"})
      */
     public function index(TaskApplicationRepository $taskApplicationRepository): Response
     {
@@ -29,30 +29,7 @@ class UserTaskApplicationController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="task_application_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $taskApplication = new TaskApplication();
-        $form = $this->createForm(TaskApplicationType::class, $taskApplication);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($taskApplication);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('task_application_index');
-        }
-
-        return $this->render('user_task_application/new.html.twig', [
-            'task_application' => $taskApplication,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="task_application_show", methods={"GET"})
+     * @Route("/{id}", name="user_task_application_show", methods={"GET"})
      */
     public function show(TaskApplication $taskApplication): Response
     {
@@ -62,7 +39,7 @@ class UserTaskApplicationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="task_application_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="user_task_application_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, TaskApplication $taskApplication): Response
     {
@@ -72,7 +49,7 @@ class UserTaskApplicationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('task_application_index', [
+            return $this->redirectToRoute('user_task_application_index', [
                 'id' => $taskApplication->getId(),
             ]);
         }
@@ -84,7 +61,7 @@ class UserTaskApplicationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="task_application_delete", methods={"DELETE"})
+     * @Route("/{id}", name="user_task_application_delete", methods={"DELETE"})
      */
     public function delete(Request $request, TaskApplication $taskApplication): Response
     {
@@ -94,7 +71,7 @@ class UserTaskApplicationController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('task_application_index');
+        return $this->redirectToRoute('user_task_application_index');
     }
 
 

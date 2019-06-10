@@ -15,7 +15,7 @@ class TaskApplicationType extends AbstractType
             ->add('hourlyRate')
             ->add('coverLetter')
             ->add('task')
-            ->add('user')
+            //->add('user')
         ;
     }
 
