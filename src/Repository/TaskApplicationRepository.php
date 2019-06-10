@@ -70,7 +70,27 @@ class TaskApplicationRepository extends ServiceEntityRepository
     public function findTaskApplicationsByUser($user): ?array
     {
         return $this->createQueryBuilder('ta')
-            //->setParameter('user', $user)
+            ->addSelect('ta', 'u')
+            ->innerJoin('ta.user', 'u')
+            ->where('u = :user')
+            //->orderBy('ta.publishedAt', 'DESC')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findTaskApplicationsByUserAndTask($user, $task): ?array
+    {
+        return $this->createQueryBuilder('ta')
+            ->addSelect('ta', 'u')
+            ->innerJoin('ta.user', 'u')
+            ->leftJoin('ta.task', 't')
+            ->where('u = :user')
+            ->andWhere('t = :task' )
+            //->orderBy('ta.publishedAt', 'DESC')
+            ->setParameter('user', $user)
+            ->setParameter('task', $task)
             ->getQuery()
             ->getResult()
             ;

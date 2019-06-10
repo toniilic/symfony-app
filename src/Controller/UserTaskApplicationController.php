@@ -23,20 +23,8 @@ class UserTaskApplicationController extends AbstractController
         $user = $this->getUser();
         $taskApplications = $taskApplicationRepository->findTaskApplicationsByUser($user);
 
-        $taskApplicationsByUser = [];
-        foreach($taskApplications as $taskApplication) {
-            // TODO: refactor
-            $taskApplications = $taskApplication->getUser()->getValues();
-
-            foreach($taskApplications as $taskApplicationUser) {
-                if($taskApplicationUser == $user) {
-                    $taskApplicationsByUser[] = $taskApplication;
-                }
-            }
-        }
-
         return $this->render('user_task_application/index.html.twig', [
-            'task_applications' => $taskApplicationsByUser,
+            'task_applications' => $taskApplications,
         ]);
     }
 

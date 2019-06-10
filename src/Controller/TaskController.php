@@ -120,53 +120,11 @@ class TaskController extends AbstractController
         // get users task application for this task
         $taskApplications = $this->getDoctrine()
             ->getRepository(TaskApplication::class)
-            ->findTaskApplicationsByTask($task);
+            ->findTaskApplicationsByUserAndTask($user, $task);
         // TODO: get current user application for this tasks
-        $currentUserAlredySubmitted = false;
-        $currentUserSubmission = null;
+        $currentUserAlredySubmitted = count($taskApplications) !== 0 ? true : false;
 
-        foreach($taskApplications as $taskApplication) {
-            // TODO: refactor
-            $taskApplications = $taskApplication->getUser()->getValues();
-
-            foreach($taskApplications as $taskApplicationUser) {
-                if($taskApplicationUser == $user) {
-                    $currentUserAlredySubmitted = true;
-                    $currentUserSubmission = $taskApplication;
-                }
-            }
-        }
-
-        $taskApplicationRepo = $this->getDoctrine()
-            ->getRepository(TaskApplication::class);
-        $taskApplicationCount = $taskApplicationRepo->getTaskApplicationsCount($task);
-
-        /** @var TaskRepository $taskRepo */
-        $taskRepo = $this->getDoctrine()
-            ->getRepository(Task::class);
-
-        /** @var @var UserRepository $userRepo */
-        $userRepo = $this->getDoctrine()
-            ->getRepository(User::class);
-
-        $em = $this->getDoctrine()->getManager()->getRepository(User::class)->findOneBy(['id'=>1]);
-
-        /*dump($task);
-        dump($task->getUser()->getId());
-        dump($userRepo->getById($task->getUser()->getId()));
-        dump($this->getUser());
-        dump($task->getCategory());
-        dump($task->getCategory()->getTasks());
-        dump($task->getPhoneNumber());*/
-        /*dump($taskApplication);*/
-        // TODO: get Task application by current user
-
-        /**
-         * TODO: show category,
-         */
-
-        dump($currentUserAlredySubmitted);
-        dump($currentUserSubmission);
+        $taskApplicationCount = count($taskApplications);
 
         return $this->render('task/show.html.twig', [
             'task' => $task,
@@ -177,7 +135,7 @@ class TaskController extends AbstractController
             'location' => $location,
             'taskApplicationCount' => $taskApplicationCount,
             'currentUserAlredySubmitted' => $currentUserAlredySubmitted,
-            'currentUserSubmission' => $currentUserSubmission
+            'currentUserSubmission' => isset($taskApplications[0]) ? $taskApplications[0] : null
 
         ]);
     }
