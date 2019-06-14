@@ -17,7 +17,11 @@
         </a>
     </small>
     {% endif %}
-
+    {% if (is_owner == true) %}
+    <small class="d-block text-right mt-3">
+        <button type="button" class="btn btn-success">This is your task</button>
+    </small>
+    {% endif %}
     <section class="row air-card-divider-sm">
         <div class="col-lg-6">
             <h4>Activity on this task</h4>

@@ -80,11 +80,6 @@ class TaskApplicationRepository extends ServiceEntityRepository
         ;
     }
 
-    public function getTaskApplicationsFromTask($task)
-    {
-
-    }
-
     public function findTaskApplicationsByUserAndTask($user, $task): ?array
     {
         return $this->createQueryBuilder('ta')
