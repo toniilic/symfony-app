@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TaskApplication index{% endblock %}
+
+{% block body %}
+    <h1>TaskApplication for task {{ task.title }}</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>HourlyRate</th>
+            <th>CoverLetter</th>
+            <th>Task</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for task_application in taskApplications %}
+            <tr>
+                <td>{{ task_application.id }}</td>
+                <td>{{ task_application.hourlyRate }}</td>
+                <td>{{ task_application.coverLetter }}</td>
+                <td><a href="{{ path('task_show', {'id': task_application.task.id}) }}" target="_blank">{{ task_application.task.title }}</a></td>
+                <td>
+                    <a href="{{ path('user_task_application_show', {'id': task_application.id}) }}">show</a>
+                    <a href="{{ path('user_task_application_edit', {'id': task_application.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

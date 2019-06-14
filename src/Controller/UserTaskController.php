@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Entity\TaskApplication;
 use App\Form\TaskType;
+use App\Repository\TaskApplicationRepository;
 use App\Repository\TaskRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +23,9 @@ class UserTaskController extends AbstractController
     public function index(TaskRepository $taskRepository): Response
     {
         $tasks = $taskRepository->findTasksByUser($this->getUser());
+
+
+        dump($tasks[0]->getTaskApplications());
 
         return $this->render('user_task/index.html.twig', [
             'tasks' => $tasks,
@@ -43,6 +48,7 @@ class UserTaskController extends AbstractController
 
             return $this->redirectToRoute('user_task_index');
         }
+
 
         return $this->render('user_task/new.html.twig', [
             'task' => $task,
@@ -94,5 +100,16 @@ class UserTaskController extends AbstractController
         }
 
         return $this->redirectToRoute('user_task_index');
+    }
+
+    /**
+     * @Route("/task-applications/{id}", name="user_task_task_applications", methods={"GET"})
+     */
+    public function showFromTaskAndUser(TaskApplicationRepository $taskAppRepo, Task $task): Response
+    {
+        return $this->render('user_task/task_applications.html.twig', [
+            'taskApplications' => $taskAppRepo->findTaskApplicationsByTask($task),
+            'task' => $task
+        ]);
     }
 }

@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Task index{% endblock %}
+{% block title %}Your Tasks{% endblock %}
 
 {% block body %}
-    <h1>Task index</h1>
+    <h1>Your Tasks</h1>
     {% if tasks is defined %}
     <table class="table">
         <thead>
@@ -34,9 +34,11 @@
                 <td>{{ task.approved ? 'Yes' : 'No' }}</td>
                 <td>{{ task.publishedAt ? task.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <button type="button" class="btn btn-primary">
-                        Applicants <span class="badge badge-light">{{ task.taskApplications | length }}</span>
-                    </button>
+                    <a href="{{ path('user_task_task_applications', {'id': task.id}) }}">
+                        <button type="button" class="btn btn-primary">
+                            Applicants <span class="badge badge-light">{{ task.taskApplications | length }}</span>
+                        </button>
+                    </a>
                 </td>
                 <td>
                     <a href="{{ path('user_task_show', {'id': task.id}) }}">show</a>

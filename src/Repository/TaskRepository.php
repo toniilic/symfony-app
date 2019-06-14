@@ -61,4 +61,22 @@ class TaskRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findTaskApplicationsByTaskOwner($user, $task): ?array
+    {
+        return $this->createQueryBuilder('t')
+            ->addSelect('t', 'u', 'ta')
+            // get tasks applications by user and task
+            ->innerJoin('ta.user', 'u')
+            ->leftJoin('ta.task', 't')
+            ->where('u = :user')
+            ->andWhere('t = :task' )
+            //->orderBy('ta.publishedAt', 'DESC')
+            ->setParameter('user', $user)
+            ->setParameter('task', $task)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }
