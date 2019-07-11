@@ -47,6 +47,19 @@ class TaskApplicationRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findTaskApplicationsAndUsersByTask($task): ?array
+    {
+        return $this->createQueryBuilder('ta')
+            ->where('ta.task = :task')
+            ->innerJoin('ta.user', 'u')
+            //->andWhere('ta.user = :user')
+            ->setParameter('task', $task)
+            //->setParameter('user', $user)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     public function getTaskApplicationsCount($task)
     {
         return $this->createQueryBuilder('t')

@@ -11,7 +11,7 @@
             <th>Id</th>
             <th>HourlyRate</th>
             <th>CoverLetter</th>
-            <th>actions</th>
+            <th>Contacts</th>
         </tr>
         </thead>
         <tbody>
@@ -19,11 +19,16 @@
             <tr>
                 <td>{{ task_application.id }}</td>
                 <td>{{ task_application.hourlyRate }}</td>
-                <td>{{ task_application.coverLetter }}</td>
                 <td>
-                    <a href="#">communicate with user</a>
-                     |
-                    <a href="#">grant user the job</a>
+                    {{ task_application.coverLetter }}
+                </td>
+                <td>
+                    <p><strong>Email:</strong> {{ task_application.user[0].email }}</p>
+                    {% for phone_number in task_application.user[0].phoneNumbers %}
+                        <p><strong>Phone number:</strong> {{ phone_number.number }}</p>
+                    {% else %}
+                        <p>No phone number added</p>
+                    {% endfor %}
                 </td>
             </tr>
         {% else %}

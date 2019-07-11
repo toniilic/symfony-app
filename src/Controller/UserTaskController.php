@@ -22,11 +22,10 @@ class UserTaskController extends AbstractController
      */
     public function index(TaskRepository $taskRepository): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $tasks = $taskRepository->findTasksByUser($this->getUser());
-
-
-        dump($tasks[0]->getTaskApplications());
-
+        
         return $this->render('user_task/index.html.twig', [
             'tasks' => $tasks,
         ]);
@@ -107,9 +106,15 @@ class UserTaskController extends AbstractController
      */
     public function showFromTaskAndUser(TaskApplicationRepository $taskAppRepo, Task $task): Response
     {
+        $taskApplications = $taskAppRepo->findTaskApplicationsAndUsersByTask($task);
+        
+        dump($taskApplications[0]->getUser()[0]);
+
         return $this->render('user_task/task_applications.html.twig', [
-            'taskApplications' => $taskAppRepo->findTaskApplicationsByTask($task),
+            'taskApplications' => $taskApplications,
             'task' => $task
         ]);
     }
+
+
 }
