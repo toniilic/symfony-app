@@ -75,26 +75,8 @@ class ProfileController extends BaseController
 
         $authErrorKey = Security::AUTHENTICATION_ERROR;
         // get captcha object instance
-        $captcha = $this->get('captcha')->setConfig('LoginCaptcha');
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
-
-            // validate the user-entered Captcha code when the form is submitted
-            $captchaCode = $request->request->get('captchaCode');
-            $isHuman = $captcha->Validate($captchaCode);
-            if ($isHuman) {
-                // Captcha validation passed, check username and password
-                return $this->redirect($this->generateUrl('fos_user_security_check'), 307);
-            } else {
-                // Captcha validation failed, set an invalid captcha exception in $authErrorKey attribute
-                $invalidCaptchaEx = new InvalidCaptchaException('CAPTCHA validation failed, try again.');
-                $request->attributes->set($authErrorKey, $invalidCaptchaEx);
-            }
-
-
-
 
             $event = new FormEvent($form, $request);
             $this->eventDispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
@@ -110,10 +92,11 @@ class ProfileController extends BaseController
 
             return $response;
         }
+        
+        dump($form->createView());
 
         return $this->render('@FOSUser/Profile/edit.html.twig', array(
-            'form' => $form->createView(),
-            'captcha_html' => $captcha->Html()
+            'form' => $form->createView()
         ));
     }
 }

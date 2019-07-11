@@ -1,6 +1,14 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block fos_user_content %}
-{% include "@FOSUser/Profile/show_content.html.twig" %}
-<a href="{{ path('fos_user_profile_edit') }}">{{ 'layout.edit'|trans({}, 'FOSUserBundle') }}</a>
-{% endblock fos_user_content %}
+{% block title %}Your Tasks{% endblock %}
+
+{% block body %}
+
+<div class="container mt-3">
+
+
+    {% include "@FOSUser/Profile/show_content.html.twig" %}
+    <a href="{{ path('fos_user_profile_edit') }}">{{ 'layout.edit'|trans({}, 'FOSUserBundle') }}</a>
+</div>
+
+{% endblock %}
