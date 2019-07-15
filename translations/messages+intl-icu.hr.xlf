@@ -18,9 +18,37 @@
                 <source>menu.my_applications</source>
                 <target>Moj zahtjevi</target>
             </trans-unit>
+            <trans-unit id="menu.user">
+                <source>menu.user</source>
+                <target>Korisnik</target>
+            </trans-unit>
             <trans-unit id="menu.register">
                 <source>menu.register</source>
                 <target>Registriraj se</target>
+            </trans-unit>
+            <trans-unit id="menu.login">
+                <source>menu.login</source>
+                <target>Ulogiraj se</target>
+            </trans-unit>
+            <trans-unit id="menu.logout">
+                <source>menu.logout</source>
+                <target>Odlogiraj se</target>
+            </trans-unit>
+            <trans-unit id="menu.create">
+                <source>menu.create</source>
+                <target>Stvori</target>
+            </trans-unit>
+            <trans-unit id="menu.location">
+                <source>menu.location</source>
+                <target>Lokaciju</target>
+            </trans-unit>
+            <trans-unit id="menu.phone_number">
+                <source>menu.phone_number</source>
+                <target>Telefonski broj</target>
+            </trans-unit>
+            <trans-unit id="menu.task">
+                <source>menu.task</source>
+                <target>Zadatak</target>
             </trans-unit>
             <trans-unit id="tip">
                 <source>tip</source>
