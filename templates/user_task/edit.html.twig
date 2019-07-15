@@ -7,7 +7,12 @@
 
     {{ include('user_task/_form.html.twig', {'button_label': 'site.update'|trans}) }}
 
-    {{ include('user_task/_delete_form.html.twig') }}
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button class="btn">{{ button_label|default('site.save'|trans) }}</button>
 
-    <a href="{{ path('user_task_index') }}">back to list</a>
+        {{ include('user_task/_delete_form.html.twig') }}
+    </div>
+
+
+    <a href="{{ path('user_task_index') }}">{{ 'site.back_to_list'|trans }}</a>
 {% endblock %}

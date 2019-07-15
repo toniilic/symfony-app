@@ -220,6 +220,14 @@
                 <source>Phone number</source>
                 <target>Broj telefona</target>
             </trans-unit>
+            <trans-unit id="18">
+                <source>site.back_to_list</source>
+                <target>nazad na listu</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>site.save</source>
+                <target>Spremi</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
