@@ -18,7 +18,9 @@ final class CategoryAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title', TextType::class)
-            ->add('description', TextareaType::class)
+            ->add('description', TextareaType::class, array(
+                'required' => false
+            ))
         ;
     }
 

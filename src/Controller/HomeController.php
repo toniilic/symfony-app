@@ -64,7 +64,7 @@ class HomeController extends Controller
             // Define the page parameter
             $request->query->getInt('page', 1),
             // Items per page
-            2
+            5
         );
 
 
