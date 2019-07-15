@@ -76,6 +76,54 @@
                 <source>site.latest_jobs</source>
                 <target>Najnoviji poslovi</target>
             </trans-unit>
+            <trans-unit id="site.your_tasks">
+                <source>site.your_tasks</source>
+                <target>Tvoji zadatci</target>
+            </trans-unit>
+            <trans-unit id="0">
+                <source>site.id</source>
+                <target>Id</target>
+            </trans-unit>
+            <trans-unit id="1">
+                <source>site.title</source>
+                <target>Naslov</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>site.description</source>
+                <target>Opis</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>site.level_of_expertise</source>
+                <target>Iskustvo</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>site.budget</source>
+                <target>Budžet</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>site.duration</source>
+                <target>Trajanje</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>site.due_date</source>
+                <target>Datum završetka</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>site.approved</source>
+                <target>Odobreno</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>site.published_at</source>
+                <target>Objavljeno</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>site.show_applicants</source>
+                <target>Prikaži podnositelje</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>site.actions</source>
+                <target>Radnje</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

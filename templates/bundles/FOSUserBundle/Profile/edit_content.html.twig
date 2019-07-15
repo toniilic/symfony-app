@@ -2,7 +2,7 @@
 
 {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
     
-    {{ form_row(form.username) }}
+    {{ form_row(form.username, { 'attr':{'disabled':'disabled'} }) }}
     {{ form_row(form.plainPassword) }}
     {{ form_row(form.email, { 'attr':{'disabled':'disabled'} }) }}
 

@@ -30,12 +30,6 @@
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('fos_user_profile_show') }}">{{ 'menu.profile'|trans }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('fos_user_registration_register') }}">{{ 'menu.register'|trans }}</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="{{ path('user_task_index') }}">{{ 'menu.my_tasks'|trans }}</a>
             </li>
             <li class="nav-item">
@@ -45,9 +39,14 @@
                 <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'menu.user'|trans }}</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="{{ path('fos_user_security_login') }}">{{ 'menu.login'|trans }}</a>
-                    <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">{{ 'menu.logout'|trans }}</a>
-                    <a class="dropdown-item" href="{{ path('fos_user_registration_register') }}">{{ 'menu.register'|trans }}</a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a class="dropdown-item" href="{{ path('fos_user_profile_show') }}">{{ 'menu.profile'|trans }}</a>
+                        <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">{{ 'menu.logout'|trans }}</a>
+                    {% endif %}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+                        <a class="dropdown-item" href="{{ path('fos_user_security_login') }}">{{ 'menu.login'|trans }}</a>
+                        <a class="dropdown-item" href="{{ path('fos_user_registration_register') }}">{{ 'menu.register'|trans }}</a>
+                    {% endif %}
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -102,8 +101,9 @@
         </div>
         {% endfor %}
     {% endfor %}
-
+    <div class="mt-4">
     {% block body %}{% endblock %}
+    </div>
 </main>
 {% block javascripts %}
 <!-- Bootstrap core JavaScript

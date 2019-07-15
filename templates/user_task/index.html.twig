@@ -3,28 +3,28 @@
 {% block title %}Your Tasks{% endblock %}
 
 {% block body %}
-    <h1>Your Tasks</h1>
+    <h1>{{ 'site.your_tasks'|trans }}</h1>
     {% if tasks is defined %}
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>LevelOfExpertise</th>
-                <th>Budget</th>
-                <th>Duration</th>
-                <th>DueDate</th>
-                <th>Approved</th>
-                <th>PublishedAt</th>
-                <th>Show applicatns</th>
-                <th>actions</th>
+{#                <th>{{ 'site.id'|trans }}</th>#}
+                <th>{{ 'site.title'|trans }}</th>
+                <th>{{ 'site.description'|trans }}</th>
+                <th>{{ 'site.level_of_expertise'|trans }}</th>
+                <th>{{ 'site.budget'|trans }}</th>
+                <th>{{ 'site.duration'|trans }}</th>
+                <th>{{ 'site.due_date'|trans }}</th>
+                <th>{{ 'site.approved'|trans }}</th>
+                <th>{{ 'site.published_at'|trans }}</th>
+                <th>{{ 'site.show_applicants'|trans }}</th>
+                <th>{{ 'site.actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
         {% for task in tasks %}
             <tr>
-                <td>{{ task.id }}</td>
+{#                <td>{{ task.id }}</td>#}
                 <td>{{ task.title }}</td>
                 <td>{{ task.description }}</td>
                 <td>{{ task.levelOfExpertise }}</td>
