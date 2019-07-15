@@ -3,15 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Location;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Form\LocationType;
+use App\Repository\LocationRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Goutte\Client;
-use GuzzleHttp\Client as GuzzleClient;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/location")
@@ -19,85 +16,81 @@ use Symfony\Component\HttpFoundation\Request;
 class LocationController extends AbstractController
 {
     /**
-    * @Route("/create", name="location_create")
-    */
-    public function create(Request $request)
+     * @Route("/", name="location_index", methods={"GET"})
+     */
+    public function index(LocationRepository $locationRepository): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        return $this->render('location/index.html.twig', [
+            'locations' => $locationRepository->findAll(),
+        ]);
+    }
 
-        $user = $this->getUser();
-
-        // Retrieve the entity manager of Doctrine
-        $em = $this->getDoctrine()->getManager();
-        $locationRepository = $em->getRepository(Location::class);
-        $location = $locationRepository->findLocationByUser($user);
-        if($location) {
-            $this->addFlash(
-                'info',
-                'You already have a location! Edit it in your users dashboard.'
-            );
-
-            return $this->redirectToRoute('home');
-        }
-
+    /**
+     * @Route("/new", name="location_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
         $location = new Location();
-        $location->setCurrency('HRK');
-        $location->setCountry('Croatia');
-        $location->setUser($user);
-        if(!$user) {
-            throw \Exception('No user');
-        }
-/*        $location->setAddress();
-        $location->setPostalCode();
-        $location->setCity();
-        $location->setRegion();*/
-
-        $form = $this->createFormBuilder($location)
-            ->add('address', TextType::class)
-            ->add('postalCode', TextType::class)
-            ->add('city', ChoiceType::class, array(
-                'choices'  => array(
-                    'Rijeka' => 'Rijeka',
-                    'Zagreb' => 'Zagreb',
-                    'Pula' => 'Pula',
-                ),
-            ))
-            ->add('region', ChoiceType::class, array(
-                'choices'  => array(
-                    'Primorsko-goranska' => 'Primorsko-goranska',
-                    'Zagrebačka' => 'Zagrebačka'
-                ),
-            ))
-            ->add('isHidden', ChoiceType::class, array(
-                'choices'  => array(
-                    'show location' => false,
-                    'hide location' => true
-                ),
-            ))
-            ->add('save', SubmitType::class, array('label' => 'Create Location'))
-            ->getForm();
-
+        $form = $this->createForm(LocationType::class, $location);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
-            $location = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($location);
+            $entityManager->flush();
 
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-             $entityManager = $this->getDoctrine()->getManager();
-             $entityManager->persist($location);
-             $entityManager->flush();
-
-             dump('redirect to home');
-
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('location_index');
         }
 
-        return $this->render('location/create.html.twig', array(
-            'form' => $form->createView()
-        ));
+        return $this->render('location/new.html.twig', [
+            'location' => $location,
+            'form' => $form->createView(),
+        ]);
     }
 
+    /**
+     * @Route("/{id}", name="location_show", methods={"GET"})
+     */
+    public function show(Location $location): Response
+    {
+        return $this->render('location/show.html.twig', [
+            'location' => $location,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="location_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Location $location): Response
+    {
+        $form = $this->createForm(LocationType::class, $location);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('location_index', [
+                'id' => $location->getId(),
+            ]);
+        }
+
+        return $this->render('location/edit.html.twig', [
+            'location' => $location,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="location_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Location $location): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$location->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($location);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('location_index');
+    }
 }

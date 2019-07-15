@@ -308,6 +308,10 @@
                 <source>site.days</source>
                 <target>dana</target>
             </trans-unit>
+            <trans-unit id="39">
+                <source>site.you_already_have_a_location</source>
+                <target>Već imaš lokaciju ! Možeš ju ažurirati u sučelju.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
