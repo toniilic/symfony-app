@@ -15,7 +15,6 @@ class TaskType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        dump($options);
         $builder
             ->add('title')
             ->add('description')
@@ -24,7 +23,7 @@ class TaskType extends AbstractType
             ->add('duration')
             ->add('dueDate')
             //->add('approved')
-            ->add('publishedAt')
+            //->add('publishedAt')
             ->add('user')
             ->add('category', EntityType::class, array(
                 'class' => Category::class,

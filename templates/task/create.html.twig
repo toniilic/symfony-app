@@ -16,12 +16,7 @@
         </small>
     {% endif %}
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
-    <small class="d-block text-right mt-3">
-        <a href="#">Go to link</a>
-    </small>
+    {{ include('user_task/_form.html.twig', {'button_label': 'site.create'|trans}) }}
 </div>
 
 

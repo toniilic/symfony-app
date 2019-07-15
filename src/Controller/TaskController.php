@@ -8,6 +8,7 @@ use App\Entity\PhoneNumber;
 use App\Entity\Task;
 use App\Entity\TaskApplication;
 use App\Entity\User;
+use App\Form\TaskType;
 use App\Repository\TaskRepository;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
@@ -42,7 +43,9 @@ class TaskController extends AbstractController
         $task->setUser($user);
         $task->setLocation($user->getLocation());
 
-        $form = $this->createFormBuilder($task)
+        $form = $this->createForm(TaskType::class, $task, array('attr' => ['user' => $user]));
+
+        /*$form = $this->createFormBuilder($task)
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
             ->add('category', EntityType::class, array(
@@ -77,7 +80,7 @@ class TaskController extends AbstractController
                 'years' => range(date('Y'), date('Y')+2)
             ))
             ->add('save', SubmitType::class, array('label' => 'Create Task'))
-            ->getForm();
+            ->getForm();*/
 
         $form->handleRequest($request);
 
