@@ -2,6 +2,11 @@
 
 {% block body %}
 
+{% if (is_owner == true) %}
+<div class="alert alert-primary" role="alert">
+    {{ 'site.your_task'|trans }}
+</div>
+{% endif %}
 
 <div class="my-3 p-3 bg-white rounded shadow-sm">
     <h2>
@@ -13,23 +18,18 @@
     {% if (is_owner != true and currentUserAlredySubmitted != true) %}
     <small class="d-block text-right mt-3">
         <a href="{{ path('task_application', {'id':task.id}) }}">
-            <button type="button" class="btn btn-primary">Apply</button>
+            <button type="button" class="btn btn-primary">{{ 'site.apply'|trans }}</button>
         </a>
-    </small>
-    {% endif %}
-    {% if (is_owner == true) %}
-    <small class="d-block text-right mt-3">
-        <button type="button" class="btn btn-success">This is your task</button>
     </small>
     {% endif %}
     <section class="row air-card-divider-sm">
         <div class="col-lg-6">
-            <h4>Activity on this task</h4>
+            <small>{{ 'site.activity_on_this_task'|trans }}</small>
 
             <ul class="list-unstyled">
                 <li class="justify-xs-md">
                     <span class="text-muted primary">
-                        Proposals:
+                        {{ 'site.proposals'|trans }}:
                     </span>
                     {{ taskApplicationCount }}
                 </li>
@@ -49,10 +49,10 @@
 
 {% if currentUserSubmission is not null %}
 <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom border-gray pb-2 mb-0">Your Application</h6>
+    <h6 class="border-bottom border-gray pb-2 mb-0">{{ 'site.your_application'|trans }}</h6>
 
     <h2>
-        {{ currentUserSubmission.hourlyRate }} HRK / Sat
+        {{ currentUserSubmission.hourlyRate }} {{ 'site.currency'|trans }} / {{ 'site.hour'|trans }}
     </h2>
     <p>
         {{ currentUserSubmission.coverLetter }}
@@ -75,26 +75,22 @@
         </thead>#}
         <tbody>
         <tr>
-            <th scope="row">Category</th>
+            <th scope="row">{{ 'site.category'|trans }}</th>
             <td>{{ category.getTitle }}</td>
         </tr>
         <tr>
-            <th scope="row">Phone number</th>
-            <td>{{ phoneNumber.getNumber }}</td>
-        </tr>
-        <tr>
-            <th scope="row">Level of expertise</th>
+            <th scope="row">{{ 'site.level_of_expertise'|trans }}</th>
             <td>{{ task.levelOfExpertise }}</td>
         </tr>
         {% if task.getDueDate is not null %}
         <tr>
-            <th scope="row">Due date</th>
+            <th scope="row">{{ 'site.due_date'|trans }}</th>
             <td>{{ task.getDueDate|date("m/d/Y")  }}</td>
         </tr>
         {% endif %}
         {% if task.location is not null %}
             <tr>
-                <th scope="row">Location</th>
+                <th scope="row">{{ 'site.location'|trans }}</th>
                 <td>
                     {{ task.location.country }},
                     {{ task.location.city }}.
@@ -104,14 +100,14 @@
         {% endif %}
         {% if task.budget is not null %}
             <tr>
-                <th scope="row">Budget</th>
-                <td>{{ task.budget }} HRK</td>
+                <th scope="row">{{ 'site.budget'|trans }}</th>
+                <td>{{ task.budget }} {{ 'site.currency'|trans }}</td>
             </tr>
         {% endif %}
         {% if task.duration is not null %}
             <tr>
-                <th scope="row">Duration</th>
-                <td>{{ task.duration }} days</td>
+                <th scope="row">{{ 'site.duration'|trans }}</th>
+                <td>{{ task.duration }} {{ 'site.days'|trans }}</td>
             </tr>
         {% endif %}
         </tbody>

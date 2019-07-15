@@ -95,7 +95,7 @@ class TaskController extends AbstractController
             $entityManager->persist($task);
             $entityManager->flush();
 
-            $this->addFlash('warning', 'You task has been submitted and is waiting for approval.');
+            $this->addFlash('warning', 'site.task_submitted');
 
             return $this->redirectToRoute('user_task_index');
         }

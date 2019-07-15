@@ -250,6 +250,64 @@
                 <source>site.expert</source>
                 <target>Stručnjak</target>
             </trans-unit>
+            <trans-unit id="25">
+                <source>site.task_submitted</source>
+                <target>
+                    Vaš zadatak je uspješno zaprimljen i čeka odobrenje.
+                </target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>site.create_new</source>
+                <target>Stvori novi</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>site.your_task</source>
+                <target>Ovo je tvoj zadatak</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>site.apply</source>
+                <target>Prijavi se</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>site.activity_on_this_task</source>
+                <target>messages</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>site.activity_on_this_task</source>
+                <target>Aktivnost na ovom zadatku</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>site.proposals</source>
+                <target>Broj prijava</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>site.your_application</source>
+                <target>Tvoj zahtjev</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>site.currency</source>
+                <target>HRK</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>site.hour</source>
+                <target>Sat</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>site.category</source>
+                <target>Category</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>site.phone_number</source>
+                <target>Broj telefona</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>site.location</source>
+                <target>Lokacija</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>site.days</source>
+                <target>dana</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
