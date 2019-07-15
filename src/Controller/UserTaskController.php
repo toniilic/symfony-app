@@ -37,6 +37,7 @@ class UserTaskController extends AbstractController
     public function new(Request $request): Response
     {
         $task = new Task();
+
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
@@ -70,7 +71,11 @@ class UserTaskController extends AbstractController
      */
     public function edit(Request $request, Task $task): Response
     {
-        $form = $this->createForm(TaskType::class, $task);
+        $user = $this->getUser();
+
+        $task->setLocation($user->getLocation());
+
+        $form = $this->createForm(TaskType::class, $task, array('attr' => ['user' => $user]));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

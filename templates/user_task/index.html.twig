@@ -31,23 +31,23 @@
                 <td>{{ task.budget }}</td>
                 <td>{{ task.duration }}</td>
                 <td>{{ task.dueDate ? task.dueDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ task.approved ? 'Yes' : 'No' }}</td>
+                <td>{{ task.approved ? 'site.yes'|trans : 'site.no'|trans }}</td>
                 <td>{{ task.publishedAt ? task.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('user_task_task_applications', {'id': task.id}) }}">
                         <button type="button" class="btn btn-primary">
-                            Applicants <span class="badge badge-light">{{ task.taskApplications | length }}</span>
+                            {{ 'site.applicants'|trans }} <span class="badge badge-light">{{ task.taskApplications | length }}</span>
                         </button>
                     </a>
                 </td>
                 <td>
-                    <a href="{{ path('user_task_show', {'id': task.id}) }}">show</a>
-                    <a href="{{ path('user_task_edit', {'id': task.id}) }}">edit</a>
+                    <a href="{{ path('user_task_show', {'id': task.id}) }}">{{ 'site.show'|trans }}</a>
+                    <a href="{{ path('user_task_edit', {'id': task.id}) }}">{{ 'site.edit'|trans }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="10">{{ 'site.no_records_found'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
