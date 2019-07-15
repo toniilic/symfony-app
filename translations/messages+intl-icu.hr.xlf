@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="hr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="menu.home_page">
+                <source>menu.home_page</source>
+                <target>Početna</target>
+            </trans-unit>
+            <trans-unit id="menu.profile">
+                <source>menu.profile</source>
+                <target>Profil</target>
+            </trans-unit>
+            <trans-unit id="menu.my_tasks">
+                <source>menu.my_tasks</source>
+                <target>Moji poslovi</target>
+            </trans-unit>
+            <trans-unit id="menu.my_applications">
+                <source>menu.my_applications</source>
+                <target>Moj zahtjevi</target>
+            </trans-unit>
+            <trans-unit id="menu.register">
+                <source>menu.register</source>
+                <target>Registriraj se</target>
+            </trans-unit>
+            <trans-unit id="tip">
+                <source>tip</source>
+                <target>SAVJET</target>
+            </trans-unit>
+            <trans-unit id="layout.edit">
+                <source>layout.edit</source>
+                <target>Podesi</target>
+            </trans-unit>
+            <trans-unit id="not_available">
+                <source>not_available</source>
+                <target>Nedostupno</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

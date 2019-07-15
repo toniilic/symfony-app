@@ -22,27 +22,24 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-    <a class="navbar-brand mr-auto mr-lg-0" href="{{ path('home') }}">Home</a>
+    <a class="navbar-brand mr-auto mr-lg-0" href="{{ path('home') }}">{{ 'menu.home_page'|trans }}</a>
     <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('fos_user_profile_show') }}">{{ 'menu.profile'|trans }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('show') }}">Show</a>
+                <a class="nav-link" href="{{ path('fos_user_registration_register') }}">{{ 'menu.register'|trans }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('fos_user_profile_show') }}">Profile</a>
+                <a class="nav-link" href="{{ path('user_task_index') }}">{{ 'menu.my_tasks'|trans }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('user_task_index') }}">My tasks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('user_task_application_index') }}">My applications</a>
+                <a class="nav-link" href="{{ path('user_task_application_index') }}">{{ 'menu.my_applications'|trans }}</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
@@ -68,7 +65,7 @@
     </div>
 </nav>
 
-<div class="nav-scroller bg-white shadow-sm">
+{#<div class="nav-scroller bg-white shadow-sm">
     <nav class="nav nav-underline">
         <a class="nav-link active" href="#">Dashboard</a>
         <a class="nav-link" href="#">
@@ -83,7 +80,7 @@
         <a class="nav-link" href="#">Link</a>
         <a class="nav-link" href="#">Link</a>
     </nav>
-</div>
+</div>#}
 
 <main role="main" class="container">
     {#<div class="d-flex align-items-center p-3 my-3 bg-purple rounded shadow-sm">
