@@ -102,7 +102,7 @@
             </trans-unit>
             <trans-unit id="5">
                 <source>site.duration</source>
-                <target>Trajanje</target>
+                <target>Trajanje posla u danima</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>site.due_date</source>
@@ -182,7 +182,7 @@
             </trans-unit>
             <trans-unit id="Duration">
                 <source>Duration</source>
-                <target>Trajanje</target>
+                <target>Trajanje u danima</target>
             </trans-unit>
             <trans-unit id="Due date">
                 <source>Due date</source>
@@ -227,6 +227,28 @@
             <trans-unit id="19">
                 <source>site.save</source>
                 <target>Spremi</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>site.edit_task</source>
+                <target>Ažuriraj Zadatak</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>site.delete_confirmation</source>
+                <target>
+                    Jeste li sigurni da želite pobrisati ovaj zadatak?
+                </target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>site.novice</source>
+                <target>Početnik</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>site.experienced</source>
+                <target>Iskusan</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>site.expert</source>
+                <target>Stručnjak</target>
             </trans-unit>
         </body>
     </file>

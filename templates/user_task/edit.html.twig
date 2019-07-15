@@ -3,7 +3,7 @@
 {% block title %}Edit Task{% endblock %}
 
 {% block body %}
-    <h1>Edit Task</h1>
+    <h1>{{ 'site.edit_task'|trans }}</h1>
 
     {{ include('user_task/_form.html.twig', {'button_label': 'site.update'|trans}) }}
 
