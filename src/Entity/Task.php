@@ -29,14 +29,7 @@ class Task
     private $title;
 
     /**
-     * @ORM\Column(type="text", length=1500)
-     *
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 1500,
-     *      minMessage = "Your description must be at least {{ limit }} characters long",
-     *      maxMessage = "Your description cannot be longer than {{ limit }} characters"
-     * )
+     * @ORM\Column(type="text", length=1500, nullable=true)
      */
     private $description;
 

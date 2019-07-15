@@ -98,7 +98,7 @@
             </trans-unit>
             <trans-unit id="4">
                 <source>site.budget</source>
-                <target>Budžet</target>
+                <target>Budžet u hrvatskim kunama</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>site.duration</source>
@@ -178,7 +178,7 @@
             </trans-unit>
             <trans-unit id="Budget">
                 <source>Budget</source>
-                <target>Budžet</target>
+                <target>Budžet u hrvatskim kunama</target>
             </trans-unit>
             <trans-unit id="Duration">
                 <source>Duration</source>
