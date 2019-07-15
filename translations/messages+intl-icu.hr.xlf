@@ -62,6 +62,20 @@
                 <source>not_available</source>
                 <target>Nedostupno</target>
             </trans-unit>
+            <trans-unit id="site_name">
+                <source>site_name</source>
+                <target>Dizaličar.com</target>
+            </trans-unit>
+            <trans-unit id="site_description">
+                <source>site_description</source>
+                <target>
+                    Naša misija je spojiti male poduzetnike i one kojima su potrebne male usluge
+                </target>
+            </trans-unit>
+            <trans-unit id="site.latest_jobs">
+                <source>site.latest_jobs</source>
+                <target>Najnoviji poslovi</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
