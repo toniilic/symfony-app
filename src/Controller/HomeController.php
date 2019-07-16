@@ -52,6 +52,7 @@ class HomeController extends Controller
         $allTasksQuery = $taskRepository->createQueryBuilder('p')
             ->where('p.approved != :approved')
             ->setParameter('approved', 'false')
+            ->orderBy('p.publishedAt', 'DESC')
             ->getQuery();
 
         /* @var $paginator \Knp\Component\Pager\Paginator */

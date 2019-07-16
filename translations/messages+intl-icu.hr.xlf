@@ -328,6 +328,14 @@
                 <source>site.submit_a_proporsal</source>
                 <target>Podnesi molbu</target>
             </trans-unit>
+            <trans-unit id="44">
+                <source>menu.tasks</source>
+                <target>Poslovi</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>menu.by_category</source>
+                <target>Izlist po kategoriji</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

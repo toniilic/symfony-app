@@ -29,17 +29,42 @@
 
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            {#<li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="https://example.com"
+                   id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'menu.tasks'|trans }}</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">{{ 'menu.by_category'|trans }}</a>
+                </div>
+            </li>#}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    {{ 'menu.tasks'|trans }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">{{ 'menu.by_category'|trans }}</a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="#">A</a>
+                            <a class="dropdown-item" href="#">b</a>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+{#            <li class="nav-item">
                 <a class="nav-link" href="{{ path('user_task_index') }}">{{ 'menu.my_tasks'|trans }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('user_task_application_index') }}">{{ 'menu.my_applications'|trans }}</a>
-            </li>
+            </li>#}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'menu.user'|trans }}</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a class="dropdown-item" href="{{ path('user_task_index') }}">{{ 'menu.my_tasks'|trans }}</a>
+                        <a class="dropdown-item" href="{{ path('user_task_application_index') }}">{{ 'menu.my_applications'|trans }}</a>
                         <a class="dropdown-item" href="{{ path('fos_user_profile_show') }}">{{ 'menu.profile'|trans }}</a>
                         <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">{{ 'menu.logout'|trans }}</a>
                     {% endif %}
@@ -111,6 +136,23 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script type="text/javascript">
+    $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+        if (!$(this).next().hasClass('show')) {
+            $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+        }
+        var $subMenu = $(this).next('.dropdown-menu');
+        $subMenu.toggleClass('show');
+
+
+        $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+            $('.dropdown-submenu .show').removeClass('show');
+        });
+
+
+        return false;
+    });
+</script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/holder.min.js') }}"></script>
