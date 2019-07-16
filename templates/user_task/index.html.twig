@@ -41,7 +41,7 @@
                     </a>
                 </td>
                 <td>
-                    <a href="{{ path('user_task_show', {'id': task.id}) }}">{{ 'site.show'|trans }}</a>
+                    <a href="{{ path('task_show', {'id': task.id}) }}" target="_blank">{{ 'site.show'|trans }}</a>
                     <a href="{{ path('user_task_edit', {'id': task.id}) }}">{{ 'site.edit'|trans }}</a>
                 </td>
             </tr>

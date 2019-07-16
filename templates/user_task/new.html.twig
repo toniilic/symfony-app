@@ -7,5 +7,5 @@
 
     {{ include('user_task/_form.html.twig') }}
 
-    <a href="{{ path('user_task_index') }}">back to list</a>
+    <a href="{{ path('user_task_index') }}">{{ 'site.back_to_list'|trans }}</a>
 {% endblock %}

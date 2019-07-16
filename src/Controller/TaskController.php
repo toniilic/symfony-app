@@ -95,7 +95,7 @@ class TaskController extends AbstractController
             $entityManager->persist($task);
             $entityManager->flush();
 
-            $this->addFlash('warning', 'site.task_submitted');
+            $this->addFlash('warning', 'Zadatak napravljen! Molimo pričekajte na odobravanje.');
 
             return $this->redirectToRoute('user_task_index');
         }
@@ -111,6 +111,14 @@ class TaskController extends AbstractController
      */
     public function show(Task $task)
     {
+        if(!$task->getApproved()) {
+            $this->addFlash('danger', 'Zadatak još nije odobren.');
+
+            return $this->redirectToRoute('home');
+        }
+
+
+
         $user = $this->getUser();
 
         $is_owner = $user == $task->getUser();

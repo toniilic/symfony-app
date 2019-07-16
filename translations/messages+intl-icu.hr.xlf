@@ -182,7 +182,7 @@
             </trans-unit>
             <trans-unit id="Duration">
                 <source>Duration</source>
-                <target>Trajanje u danima</target>
+                <target>Trajanje rada u danima</target>
             </trans-unit>
             <trans-unit id="Due date">
                 <source>Due date</source>
@@ -222,7 +222,7 @@
             </trans-unit>
             <trans-unit id="18">
                 <source>site.back_to_list</source>
-                <target>nazad na listu</target>
+                <target>nazad na izlist</target>
             </trans-unit>
             <trans-unit id="19">
                 <source>site.save</source>
@@ -314,11 +314,11 @@
             </trans-unit>
             <trans-unit id="40">
                 <source>Hourly rate</source>
-                <target>Satnica</target>
+                <target>Željena satnica u hrvatskim kunama</target>
             </trans-unit>
             <trans-unit id="41">
                 <source>Cover letter</source>
-                <target>Molba</target>
+                <target>Molba, radi čega ste vi najbolji za taj zadatak?</target>
             </trans-unit>
             <trans-unit id="42">
                 <source>Submit</source>
