@@ -312,6 +312,22 @@
                 <source>site.you_already_have_a_location</source>
                 <target>Već imaš lokaciju ! Možeš ju ažurirati u sučelju.</target>
             </trans-unit>
+            <trans-unit id="40">
+                <source>Hourly rate</source>
+                <target>Satnica</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>Cover letter</source>
+                <target>Molba</target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>Submit</source>
+                <target>Potvrdi</target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>site.submit_a_proporsal</source>
+                <target>Podnesi molbu</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

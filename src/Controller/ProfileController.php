@@ -44,6 +44,7 @@ class ProfileController extends BaseController
 
         return $this->render('@FOSUser/Profile/show.html.twig', array(
             'user' => $user,
+            'gravatarHash' => md5( strtolower( trim( $user->getEmail() ) ) )
         ));
     }
 

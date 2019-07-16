@@ -7,7 +7,23 @@
 <div class="container mt-3">
 
 
-    {% include "@FOSUser/Profile/show_content.html.twig" %}
+    <div class="card testimonial-card">
+        <!--Background color-->
+        <div class="card-up info-color"></div>
+        <!--Avatar-->
+        {#<div class="avatar mx-auto white pt-4">
+            <img src="https://s.gravatar.com/avatar/{{ gravatarHash }}?s=160" class="rounded-circle img-fluid">
+        </div>#}
+        <div class="card-body">
+            <!--Name-->
+            <h4 class="font-weight-bold mb-4">{{ user.username }}</h4>
+            <hr>
+            <!--Quotation-->
+            <p class="dark-grey-text mt-4"><i class="fa fa-quote-left pr-2"></i>
+                {{ user.email }}
+            </p>
+        </div>
+    </div>
     <a href="{{ path('fos_user_profile_edit') }}">{{ 'layout.edit'|trans({}, 'FOSUserBundle') }}</a>
 </div>
 
