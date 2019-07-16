@@ -29,13 +29,6 @@
 
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            {#<li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="https://example.com"
-                   id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'menu.tasks'|trans }}</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">{{ 'menu.by_category'|trans }}</a>
-                </div>
-            </li>#}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
@@ -78,16 +71,18 @@
                 <a class="nav-link dropdown-toggle" href="https://example.com"
                    id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'menu.create'|trans }}</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="{{ path('location_create') }}">{{ 'menu.location'|trans }}</a>
+                    <a class="dropdown-item" href="{{ path('location_new') }}">{{ 'menu.location'|trans }}</a>
                     <a class="dropdown-item" href="{{ path('phone_number_create') }}">{{ 'menu.phone_number'|trans }}</a>
                     <a class="dropdown-item" href="{{ path('task_create') }}">{{ 'menu.task'|trans }}</a>
                 </div>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        {#<form class="form-inline my-2 my-lg-0">
+            #}{#<input class="form-control mr-sm-2" type="text" placeholder="{{ 'site.search'|trans }}" aria-label="{{ 'site.search'|trans }}">#}{#
+            <a href="{{ path('task_search') }}">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ 'site.search'|trans }}</button>
+            </a>
+        </form>#}
     </div>
 </nav>
 

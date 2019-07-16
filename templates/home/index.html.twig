@@ -20,12 +20,17 @@
     {% for task in tasks %}
     <div class="media text-muted pt-3">
         <div class="mr-3">
-            {{ task.publishedAt|date("d-m-Y") }}
+            {{ task.publishedAt|date("d-m\nY") }}
         </div>
         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+
+        </p>
+        <div class="d-flex justify-content-between align-items-left w-100">
             <strong class="d-block text-gray-dark">@{{ task.user.username }}</strong>
             <strong class="d-block text-gray-dark"><a href="{{ path('task_show', {'id':task.id}) }}">{{ task.title }}</a></strong>
-        </p>
+            Auto servis -
+            Croatia, Rijeka
+        </div>
     </div>
     {% endfor %}
     <small class="d-block text-right mt-3">

@@ -151,4 +151,28 @@ class TaskController extends AbstractController
 
         ]);
     }
+
+/*    /**
+     * @Route("/search", methods={"GET"}, name="task_search")
+     */
+/*    public function search(Request $request, TaskRepository $tasks): Response
+    {
+        if (!$request->isXmlHttpRequest()) {
+            return $this->render('task/search.html.twig');
+        }
+        $query = $request->query->get('q', '');
+        $limit = $request->query->get('l', 10);
+        $foundTasks = $tasks->findBySearchQuery($query, $limit);
+        $results = [];
+        foreach ($foundTasks as $task) {
+            $results[] = [
+                'title' => htmlspecialchars($task->getTitle(), ENT_COMPAT | ENT_HTML5),
+                'date' => $task->getPublishedAt()->format('M d, Y'),
+                'author' => htmlspecialchars($task->getAuthor()->getFullName(), ENT_COMPAT | ENT_HTML5),
+                'summary' => htmlspecialchars($task->getSummary(), ENT_COMPAT | ENT_HTML5),
+                'url' => $this->generateUrl('task_show', ['slug' => $task->getId()]),
+            ];
+        }
+        return $this->json($results);
+    }*/
 }

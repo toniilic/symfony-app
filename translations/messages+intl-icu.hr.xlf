@@ -336,6 +336,38 @@
                 <source>menu.by_category</source>
                 <target>Izlist po kategoriji</target>
             </trans-unit>
+            <trans-unit id="46">
+                <source>site.search</source>
+                <target>Pretraži</target>
+            </trans-unit>
+            <trans-unit id="47">
+                <source>Country</source>
+                <target>Država</target>
+            </trans-unit>
+            <trans-unit id="48">
+                <source>Region</source>
+                <target>Regija</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>City</source>
+                <target>Grad</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>Address</source>
+                <target>Adresa</target>
+            </trans-unit>
+            <trans-unit id="51">
+                <source>Postal code</source>
+                <target>Poštanski kod</target>
+            </trans-unit>
+            <trans-unit id="52">
+                <source>Currency</source>
+                <target>Valuta</target>
+            </trans-unit>
+            <trans-unit id="53">
+                <source>Is hidden</source>
+                <target>Sakrij lokaciju</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
