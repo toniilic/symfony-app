@@ -432,6 +432,10 @@
                 <source>site.phone_numbers</source>
                 <target>Brojevi telefona</target>
             </trans-unit>
+            <trans-unit id="70">
+                <source>site.edit_phone_number</source>
+                <target>Uredi telefonski broj</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

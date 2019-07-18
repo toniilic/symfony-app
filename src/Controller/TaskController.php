@@ -100,8 +100,6 @@ class TaskController extends AbstractController
             return $this->redirectToRoute('user_task_index');
         }
 
-        dump($user);
-
         return $this->render('task/create.html.twig', array(
             'form' => $form->createView(),
             //'location' => $user->getLocation()
@@ -126,9 +124,7 @@ class TaskController extends AbstractController
         $is_owner = $user == $task->getUser();
 
         // get users task application for this task
-        $location = $this->getDoctrine()
-            ->getRepository(Location::class)
-            ->findLocationByUser($task->getUser());
+        $location = $task->getLocation();
 
         // get users task application for this task
         $taskRepo = $this->getDoctrine()

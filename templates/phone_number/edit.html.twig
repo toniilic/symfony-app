@@ -3,11 +3,11 @@
 {% block title %}Edit PhoneNumber{% endblock %}
 
 {% block body %}
-    <h1>Edit PhoneNumber</h1>
+    <h1>{{ 'site.edit_phone_number'|trans }}</h1>
 
-    {{ include('phone_number/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('phone_number/_form.html.twig', {'button_label': 'site.update'|trans}) }}
 
-    <a href="{{ path('phone_number_index') }}">back to list</a>
+    <a href="{{ path('phone_number_index') }}">{{ 'site.back_to_list'|trans }}</a>
 
     {{ include('phone_number/_delete_form.html.twig') }}
 {% endblock %}
