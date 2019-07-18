@@ -36,11 +36,6 @@ class User extends BaseUser
     private $phoneNumbers;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Location", mappedBy="user")
-     */
-    private $location;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="user")
      */
     private $tasks;
@@ -50,6 +45,11 @@ class User extends BaseUser
      */
     private $taskApplication;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Location", mappedBy="user")
+     */
+    private $locations;
+
     public function __construct()
     {
         parent::__construct();
@@ -57,6 +57,7 @@ class User extends BaseUser
         $this->tasks = new ArrayCollection();
         $this->taskApplications = new ArrayCollection();
         $this->taskApplication = new ArrayCollection();
+        $this->locations = new ArrayCollection();
     }
 
     public function addTaskApplications(Category $category)
@@ -230,6 +231,37 @@ class User extends BaseUser
             // set the owning side to null (unless already changed)
             if ($phoneNumber->getUser() === $this) {
                 $phoneNumber->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Location[]
+     */
+    public function getLocations(): Collection
+    {
+        return $this->locations;
+    }
+
+    public function addLocation(Location $location): self
+    {
+        if (!$this->locations->contains($location)) {
+            $this->locations[] = $location;
+            $location->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLocation(Location $location): self
+    {
+        if ($this->locations->contains($location)) {
+            $this->locations->removeElement($location);
+            // set the owning side to null (unless already changed)
+            if ($location->getUser() === $this) {
+                $location->setUser(null);
             }
         }
 

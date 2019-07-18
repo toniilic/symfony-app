@@ -37,13 +37,13 @@ class LocationRepository extends ServiceEntityRepository
     */
 
 
-    public function findLocationByUser($value): ?Location
+    public function findLocationsByUser($value): ?array
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.user = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
 

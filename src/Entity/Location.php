@@ -10,7 +10,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LocationRepository")
- * @UniqueEntity("address")
  */
 class Location
 {
@@ -37,7 +36,7 @@ class Location
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $address;
 
@@ -50,11 +49,6 @@ class Location
      * @ORM\Column(type="string", length=255)
      */
     private $currency;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="location")
-     */
-    private $user;
     
 /*    /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -65,6 +59,11 @@ class Location
      * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="location")
      */
     private $tasks;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="locations")
+     */
+    private $user;
 
     public function __construct()
     {

@@ -20,9 +20,13 @@ class LocationController extends AbstractController
      */
     public function index(LocationRepository $locationRepository): Response
     {
+        $user = $this->getUser();
+
+        $locations = $locationRepository->findLocationsByUser($user);
+
         // TODO: get all locations of user
         return $this->render('location/index.html.twig', [
-            'locations' => $locationRepository->findAll(),
+            'locations' => $locations,
         ]);
     }
 
