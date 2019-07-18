@@ -54,7 +54,6 @@ class TaskType extends AbstractType
                 'class' => PhoneNumber::class,
                 'query_builder' => function (EntityRepository $er) use($options){
                     return $er->createQueryBuilder('p')
-                        ->where('p.isHidden != true')
                         ->andWhere('p.user = :user')
                         ->setParameter('user', $options['attr']['user'])
                         ->orderBy('p.number', 'ASC');

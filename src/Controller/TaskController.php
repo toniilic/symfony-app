@@ -45,43 +45,6 @@ class TaskController extends AbstractController
 
         $form = $this->createForm(TaskType::class, $task, array('attr' => ['user' => $user]));
 
-        /*$form = $this->createFormBuilder($task)
-            ->add('title', TextType::class)
-            ->add('description', TextareaType::class)
-            ->add('category', EntityType::class, array(
-                'class' => Category::class,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->orderBy('c.title', 'ASC');
-                },
-                'choice_label' => 'title',
-            ))
-            ->add('phoneNumber', EntityType::class, array(
-                'class' => PhoneNumber::class,
-                'query_builder' => function (EntityRepository $er) use($user){
-                    return $er->createQueryBuilder('p')
-                        ->where('p.isHidden != true')
-                        ->andWhere('p.user = :user')
-                        ->setParameter('user', $user)
-                        ->orderBy('p.number', 'ASC');
-                },
-                'choice_label' => 'number',
-            ))
-            ->add('levelOfExpertise', ChoiceType::class, array(
-                'choices'  => array(
-                    'Novice' => 'Novice',
-                    'Experienced' => 'Experienced',
-                    'Expert' => 'Expert',
-                ),
-            ))
-            ->add('budget', IntegerType::class)
-            ->add('duration', IntegerType::class)
-            ->add('dueDate', DateTimeType::class, array(
-                'years' => range(date('Y'), date('Y')+2)
-            ))
-            ->add('save', SubmitType::class, array('label' => 'Create Task'))
-            ->getForm();*/
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
