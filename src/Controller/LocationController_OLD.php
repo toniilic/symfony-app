@@ -44,7 +44,7 @@ class LocationController_OLD extends AbstractController
 
         $location = new Location();
         $location->setCurrency('HRK');
-        $location->setCountry('Croatia');
+        $location->setCountry('Hrvatska');
         $location->setUser($user);
         if(!$user) {
             throw \Exception('No user');

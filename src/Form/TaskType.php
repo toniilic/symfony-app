@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Location;
 use App\Entity\PhoneNumber;
 use App\Entity\Task;
 use Doctrine\ORM\EntityRepository;
@@ -60,7 +61,17 @@ class TaskType extends AbstractType
                 },
                 'choice_label' => 'number',
             ))
-            //->add('location')
+            ->add('location', EntityType::class, array(
+                'class' => Location::class,
+                'query_builder' => function (EntityRepository $er) use($options) {
+                    return $er->createQueryBuilder('l')
+                        ->where('l.user = :user')
+                        ->setParameter('user', $options['attr']['user'])
+                        ->orderBy('l.address', 'ASC');
+
+                },
+                'choice_label' => 'address',
+            ))
         ;
     }
 

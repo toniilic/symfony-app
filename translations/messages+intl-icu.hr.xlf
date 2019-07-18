@@ -392,6 +392,14 @@
                 <source>site.address</source>
                 <target>Adresa</target>
             </trans-unit>
+            <trans-unit id="60">
+                <source>Location</source>
+                <target>Lokacija</target>
+            </trans-unit>
+            <trans-unit id="61">
+                <source>site.create_new_location</source>
+                <target>Stvori novu lokaciju</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

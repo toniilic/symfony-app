@@ -39,7 +39,7 @@ class LocationController extends AbstractController
 
         $location = new Location();
         $location->setCurrency('HRK');
-        $location->setCountry('Croatia');
+        $location->setCountry('Hrvatska');
         $location->setUser($user);
 
         $form = $this->createForm(LocationType::class, $location);

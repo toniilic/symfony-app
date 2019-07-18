@@ -41,7 +41,7 @@ class TaskController extends AbstractController
 
         $task = new Task();
         $task->setUser($user);
-        $task->setLocation($user->getLocation());
+        //$task->setLocation($user->getLocations());
 
         $form = $this->createForm(TaskType::class, $task, array('attr' => ['user' => $user]));
 
@@ -100,9 +100,11 @@ class TaskController extends AbstractController
             return $this->redirectToRoute('user_task_index');
         }
 
+        dump($user);
+
         return $this->render('task/create.html.twig', array(
             'form' => $form->createView(),
-            'location' => $user->getLocation()
+            //'location' => $user->getLocation()
         ));
     }
 

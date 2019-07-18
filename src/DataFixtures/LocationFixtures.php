@@ -27,13 +27,13 @@ class LocationFixtures extends Fixture implements ContainerAwareInterface, Order
 
     public function load(ObjectManager $manager)
     {
-        $this->makeLocation($manager, 'Croatia', 'Primorsko-Goranska', 'Rijeka', 'Address 34',
+        $this->makeLocation($manager, 'Hrvatska', 'Primorsko-Goranska', 'Rijeka', 'Address 34',
             51000, 'HRK', $this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
-        $this->makeLocation($manager, 'Croatia', 'Primorsko-Goranska', 'Rijeka', 'Address 35',
+        $this->makeLocation($manager, 'Hrvatska', 'Primorsko-Goranska', 'Rijeka', 'Address 35',
             51000, 'HRK', $this->getReference(UserFixtures::USER_REFERENCE));
-        $this->makeLocation($manager, 'Croatia', 'Primorsko-Goranska', 'Rijeka', 'Address 36',
+        $this->makeLocation($manager, 'Hrvatska', 'Primorsko-Goranska', 'Rijeka', 'Address 36',
             51000, 'HRK', $this->getReference(UserFixtures::USER2_REFERENCE));
-        $this->makeLocation($manager, 'Croatia', 'Primorsko-Goranska', 'Rijeka', 'Address 37',
+        $this->makeLocation($manager, 'Hrvatska', 'Primorsko-Goranska', 'Rijeka', 'Address 37',
             51000, 'HRK', $this->getReference(UserFixtures::MODERATOR_REFERENCE));
 
         $manager->flush();
