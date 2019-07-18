@@ -40,7 +40,7 @@ class TaskType extends AbstractType
             ))
             //->add('approved')
             //->add('publishedAt')
-            ->add('user')
+            //->add('user')
             ->add('category', EntityType::class, array(
                 'class' => Category::class,
                 'query_builder' => function (EntityRepository $er) {
