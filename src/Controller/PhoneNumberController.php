@@ -20,8 +20,12 @@ class PhoneNumberController extends AbstractController
      */
     public function index(PhoneNumberRepository $phoneNumberRepository): Response
     {
+        $user = $this->getUser();
+
+        $phoneNumbers = $phoneNumberRepository->findPhoneNumbersByUser($user);
+
         return $this->render('phone_number/index.html.twig', [
-            'phone_numbers' => $phoneNumberRepository->findAll(),
+            'phone_numbers' => $phoneNumbers,
         ]);
     }
 
@@ -30,7 +34,9 @@ class PhoneNumberController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
         $phoneNumber = new PhoneNumber();
+        $phoneNumber->setUser($user);
         $form = $this->createForm(PhoneNumberType::class, $phoneNumber);
         $form->handleRequest($request);
 

@@ -3,37 +3,33 @@
 {% block title %}PhoneNumber index{% endblock %}
 
 {% block body %}
-    <h1>PhoneNumber index</h1>
+    <h1>{{ 'site.phone_number_index'|trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Type</th>
-                <th>Number</th>
-                <th>IsHidden</th>
-                <th>actions</th>
+                <th>{{ 'site.type'|trans }}</th>
+                <th>{{ 'site.number'|trans }}</th>
+                <th>{{ 'site.actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
         {% for phone_number in phone_numbers %}
             <tr>
-                <td>{{ phone_number.id }}</td>
                 <td>{{ phone_number.type }}</td>
                 <td>{{ phone_number.number }}</td>
-                <td>{{ phone_number.isHidden ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('phone_number_show', {'id': phone_number.id}) }}">show</a>
-                    <a href="{{ path('phone_number_edit', {'id': phone_number.id}) }}">edit</a>
+                    <a href="{{ path('phone_number_show', {'id': phone_number.id}) }}">{{ 'site.show'|trans }}</a>
+                    <a href="{{ path('phone_number_edit', {'id': phone_number.id}) }}">{{ 'site.edit'|trans }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">{{ 'site.no_records_found'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('phone_number_new') }}">Create new</a>
+    <a href="{{ path('phone_number_new') }}">{{ 'site.create_new'|trans }}</a>
 {% endblock %}

@@ -47,4 +47,14 @@ class PhoneNumberRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findPhoneNumbersByUser($user): ?array
+    {
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

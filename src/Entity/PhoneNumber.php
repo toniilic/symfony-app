@@ -43,11 +43,6 @@ class PhoneNumber
     private $user;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $isHidden;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="phoneNumber")
      */
     private $tasks;

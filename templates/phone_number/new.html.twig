@@ -3,9 +3,9 @@
 {% block title %}New PhoneNumber{% endblock %}
 
 {% block body %}
-    <h1>Create new PhoneNumber</h1>
+    <h1>{{ 'site.create_new_phone_number'|trans }}</h1>
 
     {{ include('phone_number/_form.html.twig') }}
 
-    <a href="{{ path('phone_number_index') }}">back to list</a>
+    <a href="{{ path('phone_number_index') }}">{{ 'site.back_to_list'|trans }}</a>
 {% endblock %}

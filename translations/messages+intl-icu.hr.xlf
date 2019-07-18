@@ -126,7 +126,7 @@
             </trans-unit>
             <trans-unit id="11">
                 <source>site.no_records_found</source>
-                <target>Nismo pronašli prijave</target>
+                <target>Nismo pronašli zabilješke</target>
             </trans-unit>
             <trans-unit id="12">
                 <source>site.yes</source>
@@ -403,6 +403,34 @@
             <trans-unit id="62">
                 <source>menu.my_phone_number</source>
                 <target>Moji brojevi telefona</target>
+            </trans-unit>
+            <trans-unit id="63">
+                <source>site.phone_number_index</source>
+                <target>Vaši brojevi telefona</target>
+            </trans-unit>
+            <trans-unit id="64">
+                <source>site.create_new_phone_number</source>
+                <target>Stvori novi broj telefona</target>
+            </trans-unit>
+            <trans-unit id="65">
+                <source>Type</source>
+                <target>Tip</target>
+            </trans-unit>
+            <trans-unit id="66">
+                <source>Number</source>
+                <target>Broj</target>
+            </trans-unit>
+            <trans-unit id="67">
+                <source>site.type</source>
+                <target>Tip</target>
+            </trans-unit>
+            <trans-unit id="68">
+                <source>site.number</source>
+                <target>Broj</target>
+            </trans-unit>
+            <trans-unit id="69">
+                <source>site.phone_numbers</source>
+                <target>Brojevi telefona</target>
             </trans-unit>
         </body>
     </file>
