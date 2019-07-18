@@ -294,7 +294,7 @@
             </trans-unit>
             <trans-unit id="35">
                 <source>site.category</source>
-                <target>Category</target>
+                <target>Kategorija</target>
             </trans-unit>
             <trans-unit id="36">
                 <source>site.phone_number</source>
