@@ -3,66 +3,94 @@
 namespace App\Controller;
 
 use App\Entity\PhoneNumber;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Form\PhoneNumberType;
+use App\Repository\PhoneNumberRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/phone")
+ * @Route("/phone/number")
  */
 class PhoneNumberController extends AbstractController
 {
     /**
-    * @Route("/create", name="phone_number_create")
-    */
-    public function create(Request $request)
+     * @Route("/", name="phone_number_index", methods={"GET"})
+     */
+    public function index(PhoneNumberRepository $phoneNumberRepository): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        return $this->render('phone_number/index.html.twig', [
+            'phone_numbers' => $phoneNumberRepository->findAll(),
+        ]);
+    }
 
-        $user = $this->getUser();
-
+    /**
+     * @Route("/new", name="phone_number_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
         $phoneNumber = new PhoneNumber();
-        $phoneNumber->setUser($user);
-
-        $form = $this->createFormBuilder($phoneNumber)
-            ->add('number', IntegerType::class)
-            ->add('type', ChoiceType::class, array(
-                'choices'  => array(
-                    'Mobile' => 'mobile',
-                    'Home' => 'home'
-                ),
-            ))
-            ->add('isHidden', ChoiceType::class, array(
-                'choices'  => array(
-                    'show phone number' => false,
-                    'hide phone number' => true
-                ),
-            ))
-            ->add('save', SubmitType::class, array('label' => 'Create Phone Number'))
-            ->getForm();
-
+        $form = $this->createForm(PhoneNumberType::class, $phoneNumber);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
-            $phoneNumber = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($phoneNumber);
+            $entityManager->flush();
 
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-             $entityManager = $this->getDoctrine()->getManager();
-             $entityManager->persist($phoneNumber);
-             $entityManager->flush();
-
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('phone_number_index');
         }
 
-        return $this->render('location/create.html.twig', array(
-            'form' => $form->createView()
-        ));
+        return $this->render('phone_number/new.html.twig', [
+            'phone_number' => $phoneNumber,
+            'form' => $form->createView(),
+        ]);
     }
 
+    /**
+     * @Route("/{id}", name="phone_number_show", methods={"GET"})
+     */
+    public function show(PhoneNumber $phoneNumber): Response
+    {
+        return $this->render('phone_number/show.html.twig', [
+            'phone_number' => $phoneNumber,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="phone_number_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, PhoneNumber $phoneNumber): Response
+    {
+        $form = $this->createForm(PhoneNumberType::class, $phoneNumber);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('phone_number_index', [
+                'id' => $phoneNumber->getId(),
+            ]);
+        }
+
+        return $this->render('phone_number/edit.html.twig', [
+            'phone_number' => $phoneNumber,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="phone_number_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, PhoneNumber $phoneNumber): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$phoneNumber->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($phoneNumber);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('phone_number_index');
+    }
 }

@@ -57,6 +57,7 @@
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <a class="dropdown-item" href="{{ path('location_index') }}">{{ 'menu.my_locations'|trans }}</a>
+                        <a class="dropdown-item" href="{{ path('phone_number_index') }}">{{ 'menu.my_phone_number'|trans }}</a>
                         <a class="dropdown-item" href="{{ path('user_task_index') }}">{{ 'menu.my_tasks'|trans }}</a>
                         <a class="dropdown-item" href="{{ path('user_task_application_index') }}">{{ 'menu.my_applications'|trans }}</a>
                         <a class="dropdown-item" href="{{ path('fos_user_profile_show') }}">{{ 'menu.profile'|trans }}</a>

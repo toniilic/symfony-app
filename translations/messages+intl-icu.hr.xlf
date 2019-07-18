@@ -400,6 +400,10 @@
                 <source>site.create_new_location</source>
                 <target>Stvori novu lokaciju</target>
             </trans-unit>
+            <trans-unit id="62">
+                <source>menu.my_phone_number</source>
+                <target>Moji brojevi telefona</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
