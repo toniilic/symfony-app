@@ -49,7 +49,7 @@ class LocationType extends AbstractType
             ->add('address')
             //->add('postalCode')
             //->add('currency')
-            ->add('isHidden')
+            //->add('isHidden')
             //->add('user')
         ;
     }

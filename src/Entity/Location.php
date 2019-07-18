@@ -41,10 +41,10 @@ class Location
      */
     private $address;
 
-    /**
+/*    /**
      * @ORM\Column(type="integer", length=255)
      */
-    private $postalCode;
+    /*private $postalCode;*/
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -56,10 +56,10 @@ class Location
      */
     private $user;
     
-    /**
+/*    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $isHidden;
+    /*private $isHidden;*/
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="location")
