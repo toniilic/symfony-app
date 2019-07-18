@@ -20,6 +20,7 @@ class LocationController extends AbstractController
      */
     public function index(LocationRepository $locationRepository): Response
     {
+        // TODO: get all locations of user
         return $this->render('location/index.html.twig', [
             'locations' => $locationRepository->findAll(),
         ]);
@@ -30,7 +31,13 @@ class LocationController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
+
         $location = new Location();
+        $location->setCurrency('HRK');
+        $location->setCountry('Croatia');
+        $location->setUser($user);
+
         $form = $this->createForm(LocationType::class, $location);
         $form->handleRequest($request);
 
